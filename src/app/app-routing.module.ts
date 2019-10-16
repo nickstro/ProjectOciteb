@@ -7,7 +7,6 @@ import { from } from 'rxjs';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
-  {path:'**',component:PagenotfoundComponent},
   {path:'numberprojects',component:NumberprojectsComponent}
 ];
 

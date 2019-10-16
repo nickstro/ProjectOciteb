@@ -1,21 +1,23 @@
-<mat-sidenav-content [ngStyle]="{ 'margin-left.px': contentMargin }">
-  <div class="container">
-    <h1>Pedidos Clomaker</h1>
-    <hr>
-    <div>
+<mat-sidenav-container>
+  <mat-sidenav-content [ngStyle]="{ 'margin-left.px': contentMargin }">
+    <div class="container">
+      <h1>Pedidos Clomaker</h1>
+      <hr>
       <div>
-        <div style="display: block">
-          <canvas baseChart
-            [datasets]="barChartData"
-            [labels]="barChartLabels"
-            [options]="barChartOptions"
-            [plugins]="barChartPlugins"
-            [legend]="barChartLegend"
-            [chartType]="barChartType">
-          </canvas>
+        <div>
+          <div style="display: block">
+            <canvas baseChart
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [plugins]="barChartPlugins"
+              [legend]="barChartLegend"
+              [chartType]="barChartType">
+            </canvas>
+          </div>
+          <button mat-button mat-raised-button class="btn btn-success btn-block" (click)="randomize()">Actualizar</button>
         </div>
-        <button mat-button mat-raised-button class="btn btn-success btn-block" (click)="randomize()">Actualizar</button>
       </div>
     </div>
-  </div>
-</mat-sidenav-content>
+  </mat-sidenav-content>
+  </mat-sidenav-container>

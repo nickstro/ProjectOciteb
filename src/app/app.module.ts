@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
-import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { NumberprojectsComponent } from './components/numberprojects/numberprojects.component';
 import { ChartsModule } from 'ng2-charts';
 
@@ -26,7 +25,6 @@ import {MatToolbarModule} from  '@angular/material';
     AppComponent,
     HomeComponent,
     PagenotfoundComponent,
-    SidenavComponent,
     NumberprojectsComponent
   ],
   imports: [
