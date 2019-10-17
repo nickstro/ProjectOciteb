@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
 
   menus = menus;
   faculty;
-  inversion;
+  menu;
 
 
   constructor(
@@ -23,9 +23,9 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.faculty = faculties[+(params.get('facultyId')) - 1];
-      this.inversion = menus[+(params.get('menuId')) - 1];
+      this.menu = menus[+(params.get('menuId')) - 1];
       console.log(this.faculty);
-      console.log(this.inversion);
+      console.log(this.menu);
     });
   }
 }

@@ -28,6 +28,7 @@ import { YoungresearchersuptcComponent } from './components/formation/youngresea
 import { YoungresearcherscolcienciasComponent } from './components/formation/youngresearcherscolciencias/youngresearcherscolciencias.component';
 import { HotbedsofresearchComponent } from './components/formation/hotbedsofresearch/hotbedsofresearch.component';
 import { LeftsidebarComponent } from './components/leftsidebar/leftsidebar.component';
+import { InitComponent } from './components/init/init.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { LeftsidebarComponent } from './components/leftsidebar/leftsidebar.compo
     YoungresearcherscolcienciasComponent,
     HotbedsofresearchComponent,
     DropdownlistComponent,
-    LeftsidebarComponent
+    LeftsidebarComponent,
+    InitComponent
   ],
   imports: [
     BrowserModule,
