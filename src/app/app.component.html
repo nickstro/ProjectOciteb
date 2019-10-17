@@ -12,13 +12,10 @@
 <mat-sidenav-container class="example-sidenav-container" id="sidenavContainer" fullscreen>
   <mat-sidenav mode="over" #sidenav>
     <mat-nav-list>
-      <mat-list-item *ngFor="let faculty of faculties">
-        <button class="menu-item" mat-flat-button (click)="sidenav.toggle()">
-          <mat-icon>work</mat-icon>
-          <a [title]="faculty.name" [routerLink]="['/faculties', faculty.id]">
-            {{faculty.name}}
-          </a>
-        </button>
+      <mat-list-item *ngFor="let faculty of faculties" [routerLink]="['/faculties', faculty.id]"
+        (click)="sidenav.toggle()">
+        <mat-icon>work</mat-icon>
+        {{ faculty.name }}
       </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>
