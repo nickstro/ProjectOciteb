@@ -1,86 +1,97 @@
 <mat-toolbar id="mainToolbar" color="primary">
-  <mat-icon (click)="onToolbarMenuToggle()" id="toolbarMenu">subject</mat-icon>
-  Ociteb
-  <span class="toolbar-spacer"></span>
-  <mat-icon class="toolbar-icon" matBadge="8" matBadgePosition="after" matBadgeColor="accent"> notifications </mat-icon>
-  </mat-toolbar>
-  <mat-sidenav-container id="sidenavContainer" fullscreen>
-    <mat-sidenav mode="side" #sidenav id="sidenav" 
-      [class.menu-open]="isMenuOpen"
-      [class.menu-close]="!isMenuOpen"
-      opened>
-      <mat-list id="menus">
-        <mat-list-item>
-          <button class="menu-item"mat-flat-button>
-            <mat-icon>work</mat-icon>
-              Ciencias
-          </button>
-        </mat-list-item>
-  
-        <mat-list-item>
-          <button class="menu-item"mat-flat-button>
-            <mat-icon>chrome_reader_mode</mat-icon>
-          Ciencias Agropecuarias</button>
-          </mat-list-item>
-  
-          <mat-list-item>
-            <button class="menu-item" mat-flat-button>
-               <mat-icon>school</mat-icon>
-            Ciencias de la Educación</button>
-          </mat-list-item>
+  <mat-toolbar-row>
+    <mat-icon (click)="onToolbarMenuToggle()" id="toolbarMenu">subject</mat-icon>
+    Ocibet Project
+  </mat-toolbar-row>
+  <mat-toolbar-row>
+    <app-dropdownlist></app-dropdownlist>
+  </mat-toolbar-row>
+</mat-toolbar>
+<!--
+<mat-sidenav-container id="sidenavContainer" fullscreen>
+  <mat-sidenav mode="side" #sidenav id="sidenav" [class.menu-open]="isMenuOpen" [class.menu-close]="!isMenuOpen" opened>
+    <mat-list id="menus">
+      <mat-list-item>
+        <button class="menu-item" mat-flat-button>
+          <mat-icon>work</mat-icon>
+          Ciencias
+        </button>
+      </mat-list-item>
 
-          <mat-list-item>
-            <button class="menu-item" mat-flat-button>
-              <mat-icon>local_hospital</mat-icon>
-            Ciencias de la Salud</button>
-          </mat-list-item>
+      <mat-list-item>
+        <button class="menu-item" mat-flat-button>
+          <mat-icon>chrome_reader_mode</mat-icon>
+          Ciencias Agropecuarias
+        </button>
+      </mat-list-item>
 
-          <mat-list-item>
-            <button class="menu-item" mat-flat-button>
-                <mat-icon>monetization_on</mat-icon>
-            Ciencias Económicas y Administrativas</button>
-          </mat-list-item>
+      <mat-list-item>
+        <button class="menu-item" mat-flat-button>
+          <mat-icon>school</mat-icon>
+          Ciencias de la Educación
+        </button>
+      </mat-list-item>
 
-          <mat-list-item>
-            <button class="menu-item"mat-flat-button>
-              <mat-icon>library_books</mat-icon>
-            Derecho y Ciencias Sociales</button>
-          </mat-list-item>
-  
-          <mat-list-item>
-            <button class="menu-item" mat-flat-button>
-              <mat-icon>computer</mat-icon>
-            Estudios a Distancia</button>
-          </mat-list-item>
+      <mat-list-item>
+        <button class="menu-item" mat-flat-button>
+          <mat-icon>local_hospital</mat-icon>
+          Ciencias de la Salud
+        </button>
+      </mat-list-item>
 
-          <mat-list-item>
-            <button class="menu-item" mat-flat-button>
-              <mat-icon>memory</mat-icon>
-            Ingenieria</button>
-          </mat-list-item>
+      <mat-list-item>
+        <button class="menu-item" mat-flat-button>
+          <mat-icon>monetization_on</mat-icon>
+          Ciencias Económicas y Administrativas
+        </button>
+      </mat-list-item>
 
-          <mat-list-item>
-            <button class="menu-item" mat-flat-button>
-              <mat-icon>directions_car</mat-icon>
-            Chiquinquira</button>
-          </mat-list-item>
+      <mat-list-item>
+        <button class="menu-item" mat-flat-button>
+          <mat-icon>library_books</mat-icon>
+          Derecho y Ciencias Sociales
+        </button>
+      </mat-list-item>
 
-          <mat-list-item>
-            <button class="menu-item" mat-flat-button>
-              <mat-icon>directions_bike</mat-icon>
-            Duitama</button>
-          </mat-list-item>
+      <mat-list-item>
+        <button class="menu-item" mat-flat-button>
+          <mat-icon>computer</mat-icon>
+          Estudios a Distancia
+        </button>
+      </mat-list-item>
 
-          <mat-list-item>
-            <button class="menu-item" mat-flat-button>
-             <mat-icon>motorcycle</mat-icon>
-            Sogamoso</button>
-          </mat-list-item>
-        </mat-list>
-      </mat-sidenav>
-  
-    <mat-sidenav-content [ngStyle]="{ 'margin-left.px': contentMargin }">
-      <router-outlet></router-outlet>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-  
+      <mat-list-item>
+        <button class="menu-item" mat-flat-button>
+          <mat-icon>memory</mat-icon>
+          Ingenieria
+        </button>
+      </mat-list-item>
+
+      <mat-list-item>
+        <button class="menu-item" mat-flat-button>
+          <mat-icon>directions_car</mat-icon>
+          Chiquinquira
+        </button>
+      </mat-list-item>
+
+      <mat-list-item>
+        <button class="menu-item" mat-flat-button>
+          <mat-icon>directions_bike</mat-icon>
+          Duitama
+        </button>
+      </mat-list-item>
+
+      <mat-list-item>
+        <button class="menu-item" mat-flat-button>
+          <mat-icon>motorcycle</mat-icon>
+          Sogamoso
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content [ngStyle]="{ 'margin-left.px': contentMargin }">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+-->

@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 import { NumberprojectsComponent } from './components/Investment/numberprojects/numberprojects.component';
+import { DropdownlistComponent } from './components/dropdownlist/dropdownlist.component';
 import { ChartsModule } from 'ng2-charts';
 
 /**
@@ -18,6 +19,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import {MatCardModule} from '@angular/material';
 import {MatToolbarModule} from  '@angular/material';
+import {MatMenuModule} from  '@angular/material';
 import { LevelofprojectsComponent } from './components/Investment/levelofprojects/levelofprojects.component';
 import { TypeofentitiesComponent } from './components/Investment/typeofentities/typeofentities.component';
 import { ProductivitystimulusComponent } from './components/Investment/productivitystimulus/productivitystimulus.component';
@@ -41,7 +43,8 @@ import { HotbedsofresearchComponent } from './components/formation/hotbedsofrese
     ExtensionandsocialprojectionComponent,
     YoungresearchersuptcComponent,
     YoungresearcherscolcienciasComponent,
-    HotbedsofresearchComponent
+    HotbedsofresearchComponent,
+    DropdownlistComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +56,8 @@ import { HotbedsofresearchComponent } from './components/formation/hotbedsofrese
     MatCardModule,
     MatToolbarModule,
     ChartsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]
