@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { faculties } from 'src/app/faculties';
-import { inversionMenus } from 'src/app/inversionMenus';
+import { menus } from 'src/app/menus';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +11,7 @@ import { inversionMenus } from 'src/app/inversionMenus';
 })
 export class HomeComponent implements OnInit {
 
-  inversionMenus = inversionMenus;
+  menus = menus;
   faculty;
   inversion;
 
@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.faculty = faculties[+(params.get('facultyId')) - 1];
-      this.inversion = inversionMenus[+(params.get('menuId')) - 1];
+      this.inversion = menus[+(params.get('menuId')) - 1];
       console.log(this.faculty);
       console.log(this.inversion);
     });
