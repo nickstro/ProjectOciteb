@@ -1,5 +1,19 @@
-<button mat-icon-button color="warn">
-  <mat-icon>list</mat-icon>
-</button>
+<div *ngIf="faculty">
+  <mat-toolbar class="example-toolbar">
+    <mat-toolbar-row>
+      <app-dropdownlist></app-dropdownlist>
+    </mat-toolbar-row>
 
-<a>Holaa</a>
+    <mat-toolbar-row>
+      <h2>{{ faculty.name }}</h2>
+    </mat-toolbar-row>
+
+    <mat-toolbar-row>
+      <h3>Titulo de menu aqui</h3>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>
+
+<div>
+    <p>GRAFICAS AQUI</p>
+</div>

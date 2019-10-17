@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -28,6 +27,7 @@ import { ExtensionandsocialprojectionComponent } from './components/Investment/e
 import { YoungresearchersuptcComponent } from './components/formation/youngresearchersuptc/youngresearchersuptc.component';
 import { YoungresearcherscolcienciasComponent } from './components/formation/youngresearcherscolciencias/youngresearcherscolciencias.component';
 import { HotbedsofresearchComponent } from './components/formation/hotbedsofresearch/hotbedsofresearch.component';
+import { LeftsidebarComponent } from './components/leftsidebar/leftsidebar.component';
 
 
 @NgModule({
@@ -44,7 +44,8 @@ import { HotbedsofresearchComponent } from './components/formation/hotbedsofrese
     YoungresearchersuptcComponent,
     YoungresearcherscolcienciasComponent,
     HotbedsofresearchComponent,
-    DropdownlistComponent
+    DropdownlistComponent,
+    LeftsidebarComponent
   ],
   imports: [
     BrowserModule,

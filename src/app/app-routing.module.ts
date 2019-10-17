@@ -7,7 +7,7 @@ import { from } from 'rxjs';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
-  {path:'numberprojects',component:NumberprojectsComponent}
+  {path:'faculties/:facultyId',component:HomeComponent},
 ];
 
 @NgModule({

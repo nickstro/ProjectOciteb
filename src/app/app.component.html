@@ -1,97 +1,29 @@
-<mat-toolbar id="mainToolbar" color="primary">
+<mat-toolbar id="mainToolbar" class="example-toolbar" color="primary">
   <mat-toolbar-row>
-    <mat-icon (click)="onToolbarMenuToggle()" id="toolbarMenu">subject</mat-icon>
-    Ocibet Project
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1 class="example-app-name">Ocibet Project</h1>
   </mat-toolbar-row>
-  <mat-toolbar-row>
-    <app-dropdownlist></app-dropdownlist>
-  </mat-toolbar-row>
+
+
 </mat-toolbar>
-<!--
-<mat-sidenav-container id="sidenavContainer" fullscreen>
-  <mat-sidenav mode="side" #sidenav id="sidenav" [class.menu-open]="isMenuOpen" [class.menu-close]="!isMenuOpen" opened>
-    <mat-list id="menus">
-      <mat-list-item>
-        <button class="menu-item" mat-flat-button>
+
+<mat-sidenav-container class="example-sidenav-container" id="sidenavContainer" fullscreen>
+  <mat-sidenav mode="over" #sidenav>
+    <mat-nav-list>
+      <mat-list-item *ngFor="let faculty of faculties">
+        <button class="menu-item" mat-flat-button (click)="sidenav.toggle()">
           <mat-icon>work</mat-icon>
-          Ciencias
+          <a [title]="faculty.name" [routerLink]="['/faculties', faculty.id]">
+            {{faculty.name}}
+          </a>
         </button>
       </mat-list-item>
-
-      <mat-list-item>
-        <button class="menu-item" mat-flat-button>
-          <mat-icon>chrome_reader_mode</mat-icon>
-          Ciencias Agropecuarias
-        </button>
-      </mat-list-item>
-
-      <mat-list-item>
-        <button class="menu-item" mat-flat-button>
-          <mat-icon>school</mat-icon>
-          Ciencias de la Educación
-        </button>
-      </mat-list-item>
-
-      <mat-list-item>
-        <button class="menu-item" mat-flat-button>
-          <mat-icon>local_hospital</mat-icon>
-          Ciencias de la Salud
-        </button>
-      </mat-list-item>
-
-      <mat-list-item>
-        <button class="menu-item" mat-flat-button>
-          <mat-icon>monetization_on</mat-icon>
-          Ciencias Económicas y Administrativas
-        </button>
-      </mat-list-item>
-
-      <mat-list-item>
-        <button class="menu-item" mat-flat-button>
-          <mat-icon>library_books</mat-icon>
-          Derecho y Ciencias Sociales
-        </button>
-      </mat-list-item>
-
-      <mat-list-item>
-        <button class="menu-item" mat-flat-button>
-          <mat-icon>computer</mat-icon>
-          Estudios a Distancia
-        </button>
-      </mat-list-item>
-
-      <mat-list-item>
-        <button class="menu-item" mat-flat-button>
-          <mat-icon>memory</mat-icon>
-          Ingenieria
-        </button>
-      </mat-list-item>
-
-      <mat-list-item>
-        <button class="menu-item" mat-flat-button>
-          <mat-icon>directions_car</mat-icon>
-          Chiquinquira
-        </button>
-      </mat-list-item>
-
-      <mat-list-item>
-        <button class="menu-item" mat-flat-button>
-          <mat-icon>directions_bike</mat-icon>
-          Duitama
-        </button>
-      </mat-list-item>
-
-      <mat-list-item>
-        <button class="menu-item" mat-flat-button>
-          <mat-icon>motorcycle</mat-icon>
-          Sogamoso
-        </button>
-      </mat-list-item>
-    </mat-list>
+    </mat-nav-list>
   </mat-sidenav>
 
   <mat-sidenav-content [ngStyle]="{ 'margin-left.px': contentMargin }">
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
--->
