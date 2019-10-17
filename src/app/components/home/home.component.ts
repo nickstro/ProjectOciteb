@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { faculties } from 'src/app/faculties';
-import { menus } from 'src/app/menus';
+import { menus } from 'src/app/topbarMenus';
 
 @Component({
   selector: 'app-home',
