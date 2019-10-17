@@ -1,7 +1,33 @@
 <div *ngIf="faculty">
   <mat-toolbar class="example-toolbar">
     <mat-toolbar-row>
-      <app-dropdownlist></app-dropdownlist>
+
+      <button mat-button [matMenuTriggerFor]="inversionMenu">Inversión</button>
+      <mat-menu #inversionMenu="matMenu" yPosition="above">
+        <button mat-menu-item *ngFor="let inversion of inversionMenus"
+          [routerLink]="['/faculties', faculty.id, 'menus', inversion.id]">
+          {{ inversion.name }}
+        </button>
+      </mat-menu>
+
+      <button mat-button [matMenuTriggerFor]="formacionMenu">Formación</button>
+      <mat-menu #formacionMenu="matMenu" yPosition="above">
+        <button mat-menu-item>Item 1</button>
+        <button mat-menu-item>Item 2</button>
+      </mat-menu>
+
+      <button mat-button [matMenuTriggerFor]="capacidadesMenu">Capacidades</button>
+      <mat-menu #capacidadesMenu="matMenu" yPosition="above">
+        <button mat-menu-item>Item 1</button>
+        <button mat-menu-item>Item 2</button>
+      </mat-menu>
+
+      <button mat-button [matMenuTriggerFor]="produccionMenu">Producción Bibliográfica</button>
+      <mat-menu #produccionMenu="matMenu" yPosition="above">
+        <button mat-menu-item>Item 1</button>
+        <button mat-menu-item>Item 2</button>
+      </mat-menu>
+
     </mat-toolbar-row>
 
     <mat-toolbar-row>
@@ -9,11 +35,11 @@
     </mat-toolbar-row>
 
     <mat-toolbar-row>
-      <h3>Titulo de menu aqui</h3>
+      <h3>{{ inversion.name }}</h3>
     </mat-toolbar-row>
   </mat-toolbar>
 </div>
 
 <div>
-    <p>GRAFICAS AQUI</p>
+  <p>GRAFICAS AQUI</p>
 </div>
