@@ -15,7 +15,7 @@
         </div>
       </mat-menu>
 
-      <button mat-button [matMenuTriggerFor]="formationMenu">Inversión</button>
+      <button mat-button [matMenuTriggerFor]="formationMenu">Formación</button>
       <mat-menu #formationMenu="matMenu" yPosition="above">
         <div *ngFor="let formationMenu of menus">
           <button
@@ -28,7 +28,7 @@
         </div>
       </mat-menu>
 
-      <button mat-button [matMenuTriggerFor]="capacityMenu">Inversión</button>
+      <button mat-button [matMenuTriggerFor]="capacityMenu">Capacidades</button>
       <mat-menu #capacityMenu="matMenu" yPosition="above">
         <div *ngFor="let capacityMenu of menus">
           <button
@@ -68,6 +68,5 @@
   </mat-toolbar>
 </div>
 
-<div>
-  <app-numberprojects></app-numberprojects>
-</div>
+<ng-template #container>
+</ng-template>

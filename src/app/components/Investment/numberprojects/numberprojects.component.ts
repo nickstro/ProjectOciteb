@@ -7,6 +7,7 @@ import { Component} from '@angular/core';
 })
 export class NumberprojectsComponent{
 
+  public name = "holo";
   public barChartOptions: any ={
     scaleShowVerticalLines:false,
     responsive : true };
@@ -20,7 +21,7 @@ export class NumberprojectsComponent{
     { data: [28, 48, 40, 19, 86, 27, 90], label: 'Pedidos particulares' }
   ];
 
- 
+
   // events
   public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
     console.log(event, active);

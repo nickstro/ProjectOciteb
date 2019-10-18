@@ -10,7 +10,7 @@ export class PokeapiService {
   // GET REQUEST
   private REST_API_SERVER = 'localhost:3000/get';
 
-  private REST_API_POST = 'http://192.168.0.21:3001/investment/getData';
+  private REST_API_POST = 'http://192.168.43.140:3001/investment/getData';
 
   constructor(private httpClient: HttpClient) { }
 
