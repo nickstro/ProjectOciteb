@@ -1,3 +1,4 @@
+import { PokeapiService } from './pokeapi.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -18,8 +19,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import {MatCardModule} from '@angular/material';
-import {MatToolbarModule} from  '@angular/material';
-import {MatMenuModule} from  '@angular/material';
+import {MatToolbarModule} from '@angular/material';
+import {MatMenuModule} from '@angular/material';
 import { LevelofprojectsComponent } from './components/Investment/levelofprojects/levelofprojects.component';
 import { TypeofentitiesComponent } from './components/Investment/typeofentities/typeofentities.component';
 import { ProductivitystimulusComponent } from './components/Investment/productivitystimulus/productivitystimulus.component';
@@ -64,7 +65,9 @@ import { InitComponent } from './components/init/init.component';
     MatMenuModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    PokeapiService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

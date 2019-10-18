@@ -28,12 +28,23 @@ export class HomeComponent implements OnInit {
       this.menu = menus[+(params.get('menuId')) - 1];
       console.log(this.faculty);
       console.log(this.menu);
-      this.sendGetRequest();
+      // this.sendGetRequest();
+      this.sendPostRequest();
     });
   }
 
   sendGetRequest() {
     this.pokeApi.sendGetRequest().subscribe((data: any[]) => {
+      console.log(data);
+    });
+  }
+
+  sendPostRequest() {
+    const request = {};
+    request['facultyId'] = this.faculty.id;
+    request['menuId'] = this.menu.id;
+    console.log(request);
+    this.pokeApi.sendPostRequest(request).subscribe((data: any[]) => {
       console.log(data);
     });
   }
