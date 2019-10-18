@@ -12,7 +12,7 @@
 <mat-sidenav-container class="example-sidenav-container" id="sidenavContainer" fullscreen>
   <mat-sidenav mode="over" #sidenav>
     <mat-nav-list>
-      <mat-list-item *ngFor="let faculty of faculties" [routerLink]="['/faculties', faculty.id]"
+      <mat-list-item *ngFor="let faculty of faculties" [routerLink]="['/faculties', faculty.id, menus, 1]"
         (click)="sidenav.toggle()">
         <mat-icon>work</mat-icon>
         {{ faculty.name }}
