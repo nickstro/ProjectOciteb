@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { PokeapiService } from 'src/app/pokeapi.service';
 import { faculties } from 'src/app/faculties';
 import { menus } from 'src/app/topbarMenus';
 
@@ -18,6 +19,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private pokeApi: PokeapiService
   ) { }
 
   ngOnInit() {
@@ -26,6 +28,13 @@ export class HomeComponent implements OnInit {
       this.menu = menus[+(params.get('menuId')) - 1];
       console.log(this.faculty);
       console.log(this.menu);
+      this.sendGetRequest();
+    });
+  }
+
+  sendGetRequest() {
+    this.pokeApi.sendGetRequest().subscribe((data: any[]) => {
+      console.log(data);
     });
   }
 }
