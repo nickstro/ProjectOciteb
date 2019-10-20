@@ -31,6 +31,11 @@ import { YoungresearcherscolcienciasComponent } from './components/formation/you
 import { HotbedsofresearchComponent } from './components/formation/hotbedsofresearch/hotbedsofresearch.component';
 import { LeftsidebarComponent } from './components/leftsidebar/leftsidebar.component';
 import { InitComponent } from './components/init/init.component';
+import { HbarComponent } from './components/hbar/hbar.component';
+import { StackedComponent } from './components/stacked/stacked.component';
+import { TableComponent } from './components/table/table.component';
+import { WavesModule, TableModule } from 'angular-bootstrap-md';
+
 
 
 @NgModule({
@@ -49,7 +54,10 @@ import { InitComponent } from './components/init/init.component';
     HotbedsofresearchComponent,
     DropdownlistComponent,
     LeftsidebarComponent,
-    InitComponent
+    InitComponent,
+    HbarComponent,
+    StackedComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +69,8 @@ import { InitComponent } from './components/init/init.component';
     MatCardModule,
     MatToolbarModule,
     ChartsModule,
+    WavesModule,
+    TableModule,
     AppRoutingModule,
     MatMenuModule,
     HttpClientModule
