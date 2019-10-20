@@ -54,15 +54,19 @@ export class HomeComponent implements OnInit {
           this.entry.clear();
           const factory = this.resolver.resolveComponentFactory(NumberprojectsComponent);
           const componentRef = this.entry.createComponent(factory);
-          //componentRef.instance.name carga los datos en el componente seleccionado
-          componentRef.instance.name = this.name;
+          // Ejemplo con NumberprojectsComponent
+          // componentRef.instance permite acceder a las variables del componente
+          // que se este llamando en factory
+
+          // testVar de numberprojects.component.ts es la variable que se esta igualando
+          componentRef.instance.testVar = 'Cualquier valor aqui';
           break;
 
       case 2:
           this.entry.clear();
           const factory2 = this.resolver.resolveComponentFactory(LevelofprojectsComponent);
           const componentRef2 = this.entry.createComponent(factory2);
-          componentRef2.instance.name = "HOLAAAAAAAAAAAA";
+          componentRef2.instance.name = "Grafica";
           break;
     }
     this.pokeApi.sendPostRequest(request).subscribe((data: any[]) => {

@@ -7,7 +7,9 @@ import { Component} from '@angular/core';
 })
 export class NumberprojectsComponent{
 
-  public name = "holo";
+  // Ejemplo aqui
+  public testVar = '';
+
   public barChartOptions: any ={
     scaleShowVerticalLines:false,
     responsive : true };
