@@ -12,9 +12,9 @@ const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'faculties/:facultyId', component: HomeComponent},
   {path: 'faculties/:facultyId/menus/:menuId', component: HomeComponent},
-  {path:'hbar',component:HbarComponent},
-  {path: 'stacked', component:StackedComponent},
-  {path: 'table', component:TableComponent}
+  {path: 'hbar', component: HbarComponent},
+  {path: 'stacked', component: StackedComponent},
+  {path: 'table', component: TableComponent}
 ];
 
 @NgModule({

@@ -1,2 +1,20 @@
+.main-toolbar{
+  background-color: #F9DD00;
+}
 
-  
+.navbar-container {
+  background-color: white;
+  width: 100%;
+}
+
+.main-title{
+  color: black;
+}
+
+.main-sidenav{
+  background-color: black;
+}
+
+.text-toolbar{
+  color: white;
+}

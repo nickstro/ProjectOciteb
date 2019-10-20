@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewContainerRef, ViewChild, ComponentFactoryResolver } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, ViewChild, ComponentFactoryResolver} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { NumberprojectsComponent } from 'src/app/components/Investment/numberprojects/numberprojects.component';
-import { LevelofprojectsComponent } from './../Investment/levelofprojects/levelofprojects.component';
+import { HbarComponent } from 'src/app/components/hbar/hbar.component';
+import { StackedComponent } from 'src/app/components/stacked/stacked.component';
+import { TableComponent } from 'src/app/components/table/table.component';
 
 import { PokeapiService } from 'src/app/pokeapi.service';
 import { faculties } from 'src/app/faculties';
@@ -12,7 +13,7 @@ import { menus } from 'src/app/topbarMenus';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  entryComponents: [NumberprojectsComponent, LevelofprojectsComponent]
+  entryComponents: [HbarComponent, StackedComponent, TableComponent]
 })
 export class HomeComponent implements OnInit {
 
@@ -21,7 +22,9 @@ export class HomeComponent implements OnInit {
   faculty;
   menu;
 
-  @ViewChild('container', { static: true, read: ViewContainerRef }) entry: ViewContainerRef;
+  @ViewChild('hbarcontainer', { static: true, read: ViewContainerRef }) hbarEntry: ViewContainerRef;
+  @ViewChild('stackedcontainer', { static: true, read: ViewContainerRef }) stackedEntry: ViewContainerRef;
+  @ViewChild('tablecontainer', { static: true, read: ViewContainerRef }) tableEntry: ViewContainerRef;
 
   constructor(
     private resolver: ComponentFactoryResolver,
@@ -51,23 +54,24 @@ export class HomeComponent implements OnInit {
 
     switch (this.menu.id) {
       case 1:
-          this.entry.clear();
-          const factory = this.resolver.resolveComponentFactory(NumberprojectsComponent);
-          const componentRef = this.entry.createComponent(factory);
+          this.hbarEntry.clear();
+          this.stackedEntry.clear();
+          this.tableEntry.clear();
+          const hbarFactory = this.resolver.resolveComponentFactory(HbarComponent);
+          const stackedFactory = this.resolver.resolveComponentFactory(StackedComponent);
+          const tableFactory = this.resolver.resolveComponentFactory(TableComponent);
+          this.hbarEntry.createComponent(hbarFactory);
+          this.stackedEntry.createComponent(stackedFactory);
+          this.tableEntry.createComponent(tableFactory);
+
           // Ejemplo con NumberprojectsComponent
           // componentRef.instance permite acceder a las variables del componente
           // que se este llamando en factory
 
           // testVar de numberprojects.component.ts es la variable que se esta igualando
-          componentRef.instance.testVar = 'Cualquier valor aqui';
+          // componentRef.instance.testVar = 'Cualquier valor aqui';
           break;
 
-      case 2:
-          this.entry.clear();
-          const factory2 = this.resolver.resolveComponentFactory(LevelofprojectsComponent);
-          const componentRef2 = this.entry.createComponent(factory2);
-          componentRef2.instance.name = "Grafica";
-          break;
     }
     this.pokeApi.sendPostRequest(request).subscribe((data: any[]) => {
       console.log(data);
