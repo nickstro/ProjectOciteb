@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
-import { NumberprojectsComponent } from './components/Investment/numberprojects/numberprojects.component';
 import { DropdownlistComponent } from './components/dropdownlist/dropdownlist.component';
 import { ChartsModule } from 'ng2-charts';
 
@@ -21,19 +20,10 @@ import {MatListModule} from '@angular/material/list';
 import {MatCardModule} from '@angular/material';
 import {MatToolbarModule} from '@angular/material';
 import {MatMenuModule} from '@angular/material';
-import { LevelofprojectsComponent } from './components/Investment/levelofprojects/levelofprojects.component';
-import { TypeofentitiesComponent } from './components/Investment/typeofentities/typeofentities.component';
-import { ProductivitystimulusComponent } from './components/Investment/productivitystimulus/productivitystimulus.component';
-import { OwnpostgraduateresourcesComponent } from './components/Investment/ownpostgraduateresources/ownpostgraduateresources.component';
-import { ExtensionandsocialprojectionComponent } from './components/Investment/extensionandsocialprojection/extensionandsocialprojection.component';
-import { YoungresearchersuptcComponent } from './components/formation/youngresearchersuptc/youngresearchersuptc.component';
-import { YoungresearcherscolcienciasComponent } from './components/formation/youngresearcherscolciencias/youngresearcherscolciencias.component';
-import { HotbedsofresearchComponent } from './components/formation/hotbedsofresearch/hotbedsofresearch.component';
 import { LeftsidebarComponent } from './components/leftsidebar/leftsidebar.component';
-import { InitComponent } from './components/init/init.component';
-import { HbarComponent } from './components/hbar/hbar.component';
-import { StackedComponent } from './components/stacked/stacked.component';
-import { TableComponent } from './components/table/table.component';
+import { HbarComponent } from './components/graphics/hbar/hbar.component';
+import { StackedComponent } from './components/graphics/stacked/stacked.component';
+import { TableComponent } from './components/graphics/table/table.component';
 import { WavesModule, TableModule } from 'angular-bootstrap-md';
 
 
@@ -43,18 +33,8 @@ import { WavesModule, TableModule } from 'angular-bootstrap-md';
     AppComponent,
     HomeComponent,
     PagenotfoundComponent,
-    NumberprojectsComponent,
-    LevelofprojectsComponent,
-    TypeofentitiesComponent,
-    ProductivitystimulusComponent,
-    OwnpostgraduateresourcesComponent,
-    ExtensionandsocialprojectionComponent,
-    YoungresearchersuptcComponent,
-    YoungresearcherscolcienciasComponent,
-    HotbedsofresearchComponent,
     DropdownlistComponent,
     LeftsidebarComponent,
-    InitComponent,
     HbarComponent,
     StackedComponent,
     TableComponent

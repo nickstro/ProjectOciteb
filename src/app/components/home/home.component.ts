@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewContainerRef, ViewChild, ComponentFactoryResolver} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { HbarComponent } from 'src/app/components/hbar/hbar.component';
-import { StackedComponent } from 'src/app/components/stacked/stacked.component';
-import { TableComponent } from 'src/app/components/table/table.component';
+import { HbarComponent } from 'src/app/components/graphics/hbar/hbar.component';
+import { StackedComponent } from 'src/app/components/graphics/stacked/stacked.component';
+import { TableComponent } from 'src/app/components/graphics/table/table.component';
 
 import { PokeapiService } from 'src/app/pokeapi.service';
 import { faculties } from 'src/app/faculties';
