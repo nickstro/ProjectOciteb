@@ -67,18 +67,81 @@
   </mat-toolbar>
 </div>
 
-<div class="graphic-container" style="width: 100%; height: 100%;">
-  <div class="row">
-    <div class="column">
-      <ng-template #hbarcontainer> </ng-template>
-    </div>
+<div class="pull-right">
+  <div>
+    <button class="float-button" mat-button (click)="scroll(hbarcontainer)">
+      HBar
+    </button>
+  </div>
+  <div>
+    <button class="float-button" mat-button (click)="scroll(stackedcontainer)">
+      Stacked
+    </button>
+  </div>
+  <div>
+    <button class="float-button" mat-button (click)="scroll(tablecontainer)">
+      Table
+    </button>
+  </div>
+</div>
 
-    <div class="column">
-      <ng-template #stackedcontainer> </ng-template>
+<div class="sticky-top">
+  <button
+    class="btn btn-primary"
+    type="button"
+    data-toggle="collapse"
+    data-target="#multiCollapseHBar"
+    aria-expanded="false"
+    aria-controls="multiCollapseHBar"
+  >
+    Alternar HBar
+  </button>
+
+  <button
+    class="btn btn-primary"
+    type="button"
+    data-toggle="collapse"
+    data-target="#multiCollapseStacked"
+    aria-expanded="false"
+    aria-controls="multiCollapseStacked"
+  >
+    Alternar Stacked
+  </button>
+
+  <button
+    class="btn btn-primary"
+    type="button"
+    data-toggle="collapse"
+    data-target="#multiCollapseTable"
+    aria-expanded="false"
+    aria-controls="multiCollapseTable"
+  >
+    Alternar Table
+  </button>
+</div>
+
+<div class="container-fluid" style="width: 100%; height: 100%;">
+  <div class="col-md-8">
+    <div class="collapse multi-collapse" id="multiCollapseHBar">
+      <div class="card card-body">
+        <div #hbarcontainer></div>
+      </div>
     </div>
   </div>
 
-  <div class="table">
-    <ng-template #tablecontainer> </ng-template>
+  <div class="col-md-8">
+    <div class="collapse multi-collapse" id="multiCollapseStacked">
+      <div class="card card-body">
+        <div #stackedcontainer></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-8">
+    <div class="collapse multi-collapse" id="multiCollapseTable">
+      <div class="card card-body">
+        <div #tablecontainer></div>
+      </div>
+    </div>
   </div>
 </div>
