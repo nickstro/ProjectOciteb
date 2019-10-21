@@ -78,12 +78,10 @@ export class HomeComponent implements OnInit {
   sendPostRequest() {
     const json = {
       facultyId: this.faculty.id,
-      menuId: Conversor.getMenuId(this.menu.id)
+      menuId: this.getMenuId()
     };
 
-    this.pokeApi.sendPostRequest(json).subscribe((data: any[]) => {
-
-      this.hbarEntry.clear();
+    this.hbarEntry.clear();
       this.stackedEntry.clear();
       this.tableEntry.clear();
       this.pieEntry.clear();
@@ -103,41 +101,81 @@ export class HomeComponent implements OnInit {
         MixedComponent
       );
 
-      this.hbarEntry.createComponent(hbarFactory);
-      this.stackedEntry.createComponent(stackedFactory);
-      this.tableEntry.createComponent(tableFactory);
-      this.pieEntry.createComponent(pieFactory);
-      this.lineEntry.createComponent(lineFactory);
-      this.mixedEntry.createComponent(mixedFactory);
-
       switch (this.menu.id) {
         case 1:
+            this.stackedEntry.createComponent(stackedFactory);
+            this.tableEntry.createComponent(tableFactory);
+            const lineConst = this.lineEntry.createComponent(lineFactory);
+            lineConst.instance.title = "Hola vengo de home";
           break;
         case 2:
+            this.tableEntry.createComponent(tableFactory);
+            this.lineEntry.createComponent(lineFactory);
           break;
         case 3:
+            this.tableEntry.createComponent(tableFactory);
+            this.lineEntry.createComponent(lineFactory);
           break;
         case 4:
+            this.mixedEntry.createComponent(mixedFactory);
+            this.tableEntry.createComponent(tableFactory);
           break;
         case 5:
+            this.hbarEntry.createComponent(hbarFactory);
+            this.tableEntry.createComponent(tableFactory);
+            //se puede hacer dos graficas de dona
+            //Grafica Año vs Aaporte
+            this.pieEntry.createComponent(pieFactory);
           break;
         case 6:
+            this.lineEntry.createComponent(lineFactory);
+            this.tableEntry.createComponent(tableFactory);
+            //año vs aporte
+            this.pieEntry.createComponent(pieFactory);
           break;
         case 7:
+            this.lineEntry.createComponent(lineFactory);
+            this.tableEntry.createComponent(tableFactory);
+            this.hbarEntry.createComponent(hbarFactory);
+            //año vs numero jovenes investigadores
+            this.pieEntry.createComponent(pieFactory);
           break;
         case 8:
+            this.lineEntry.createComponent(lineFactory);
+            this.tableEntry.createComponent(tableFactory);
+            this.hbarEntry.createComponent(hbarFactory);
+            //año vs numero jovenes investigadores
+            this.pieEntry.createComponent(pieFactory);
           break;
         case 9:
+          //F03. Semilleros de investigación
+            this.lineEntry.createComponent(lineFactory);
+            this.tableEntry.createComponent(tableFactory);
+            //año vs numero jovenes investigadores
+            this.pieEntry.createComponent(pieFactory);  
           break;
         case 10:
+          //C01. Grupos de investigación categorizados por Colciencias
+            this.hbarEntry.createComponent(hbarFactory);
           break;
         case 11:
+          //C02. Investigadores reconocidos
+            this.hbarEntry.createComponent(hbarFactory);
           break;
         case 12:
+          //C02.1. Investigadores docentes según nivel de estudios y tipo de vinculación
+           this.hbarEntry.createComponent(hbarFactory);
           break;
         case 13:
+          //PB03. Número de libros sello editorial Uptc
+            this.tableEntry.createComponent(tableFactory);
+            this.pieEntry.createComponent(pieFactory);
+            this.lineEntry.createComponent(lineFactory);   
           break;
       }
+
+    this.pokeApi.sendPostRequest(json).subscribe((data: any[]) => {
+      
       console.log(data);
     });
   }
@@ -153,5 +191,50 @@ export class HomeComponent implements OnInit {
       left: 0,
       behavior: 'smooth'
     });
+  }
+
+  getMenuId() {
+    let menu = "";
+    switch (this.menu.id) {
+      case 1:
+        menu = "I01";
+        break;
+      case 2:
+        menu = "I02";
+        break;
+      case 3:
+        menu = "I03";
+        break;
+      case 4:
+        menu = "I04";
+        break;
+      case 5:
+        menu = "I05";
+        break;
+      case 6:
+        menu = "I06";
+        break;
+      case 7:
+        menu = "F01";
+        break;
+      case 8:
+        menu = "F02";
+        break;
+      case 9:
+        menu = "F03";
+        break;
+      case 10:
+        menu = "C01";
+        break;
+      case 11:
+        menu = "C02";
+        break;
+      case 12:
+        menu = "C02.1";
+        break;
+      case 13:
+        menu = "PB03";
+        break;
+    }
   }
 }

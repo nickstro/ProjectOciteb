@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./hbar.component.css']
 })
 export class HbarComponent {
+
   public barChartOptions: any ={
     scaleShowHorizontalLines:false,
     responsive : true };
