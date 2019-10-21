@@ -14,6 +14,7 @@ import { TableComponent } from "src/app/components/graphics/table/table.componen
 import { PokeapiService } from "src/app/pokeapi.service";
 import { faculties } from "src/app/faculties";
 import { menus } from "src/app/topbarMenus";
+import { HttpClient } from "@angular/common/http";
 
 @Component({
   selector: "app-home",
@@ -26,6 +27,7 @@ export class HomeComponent implements OnInit {
   menus = menus;
   faculty;
   menu;
+  apiResponse;
 
   public showHBar: true;
   public showStacked = true;
@@ -41,28 +43,29 @@ export class HomeComponent implements OnInit {
   constructor(
     private resolver: ComponentFactoryResolver,
     private route: ActivatedRoute,
-    private pokeApi: PokeapiService
+    private pokeApi: PokeapiService,
+    private http: HttpClient
   ) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.faculty = faculties[+params.get("facultyId") - 1];
       this.menu = menus[+params.get("menuId") - 1];
-      // this.sendGetRequest();
       this.sendPostRequest();
     });
   }
 
   sendPostRequest() {
-    const request = {};
-    request["facultyId"] = this.faculty.id;
-    request["menuId"] = this.menu.id;
+    const json = {
+      facultyId: this.faculty.id,
+      menuId: this.getMenuId(this.menu.id)
+    };
 
+    this.pokeApi.sendPostRequest(json).subscribe((data: any[]) => {
+      /*
     switch (this.menu.id) {
       case 1:
-        this.hbarEntry.clear();
-        this.stackedEntry.clear();
-        this.tableEntry.clear();
+
         const hbarFactory = this.resolver.resolveComponentFactory(
           HbarComponent
         );
@@ -84,12 +87,109 @@ export class HomeComponent implements OnInit {
         // componentRef.instance.testVar = 'Cualquier valor aqui';
         break;
     }
-    this.pokeApi.sendPostRequest(request).subscribe((data: any[]) => {
+    */
+
+      this.hbarEntry.clear();
+      this.stackedEntry.clear();
+      this.tableEntry.clear();
+
+      const hbarFactory = this.resolver.resolveComponentFactory(
+        HbarComponent
+      );
+      const stackedFactory = this.resolver.resolveComponentFactory(
+        StackedComponent
+      );
+      const tableFactory = this.resolver.resolveComponentFactory(
+        TableComponent
+      );
+
+      switch (this.menu.id) {
+        case 1:
+          break;
+        case 2:
+          break;
+        case 3:
+          break;
+        case 4:
+          break;
+        case 5:
+          break;
+        case 6:
+          break;
+        case 7:
+          break;
+        case 8:
+          break;
+        case 9:
+          break;
+        case 10:
+          break;
+        case 11:
+          break;
+        case 12:
+          break;
+        case 13:
+          break;
+      }
       console.log(data);
     });
   }
 
   scroll(el: HTMLElement) {
     el.scrollIntoView();
+  }
+
+  gotoTop() {
+    // TODO Arreglar el scroll hasta arriba
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
+  }
+
+  getMenuId(menuId: any) {
+    let menu = "";
+    switch (menuId) {
+      case 1:
+        menu = "I01";
+        break;
+      case 2:
+        menu = "I02";
+        break;
+      case 3:
+        menu = "I03";
+        break;
+      case 4:
+        menu = "I04";
+        break;
+      case 5:
+        menu = "I05";
+        break;
+      case 6:
+        menu = "I06";
+        break;
+      case 7:
+        menu = "F01";
+        break;
+      case 8:
+        menu = "F02";
+        break;
+      case 9:
+        menu = "F03";
+        break;
+      case 10:
+        menu = "C01";
+        break;
+      case 11:
+        menu = "C02";
+        break;
+      case 12:
+        menu = "C02.1";
+        break;
+      case 13:
+        menu = "PB03";
+        break;
+    }
   }
 }

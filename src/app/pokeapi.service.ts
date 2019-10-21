@@ -16,14 +16,14 @@ export class PokeapiService {
 
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded'
+      'Content-Type': 'application/json'
     })
   };
 
   public sendPostRequest(request) {
-    return this.httpClient.post(this.REST_API_POST, JSON.stringify(request), this.httpOptions)
+    return this.httpClient.post(this.REST_API_POST, request, this.httpOptions)
       .pipe(
-        retry(3),
+        retry(1),
         catchError(this.handleError)
       );
   }
@@ -33,7 +33,7 @@ export class PokeapiService {
   }
 
   private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
+    console.error('An error occurred', error.error); // for demo purposes only
     return Promise.reject(error.message || error);
  }
 }

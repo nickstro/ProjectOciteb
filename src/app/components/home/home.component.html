@@ -1,4 +1,4 @@
-<div *ngIf="faculty">
+<div #mainmenu *ngIf="faculty">
   <mat-toolbar class="example-toolbar">
     <mat-toolbar-row>
       <button mat-button [matMenuTriggerFor]="inversionMenu">Inversión</button>
@@ -68,6 +68,11 @@
 </div>
 
 <div class="pull-right">
+    <div>
+        <button class="float-button" mat-button (click)="gotoTop()">
+          Menu principal
+        </button>
+      </div>
   <div>
     <button class="float-button" mat-button (click)="scroll(hbarcontainer)">
       HBar
