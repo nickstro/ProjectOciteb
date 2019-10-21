@@ -25,6 +25,9 @@ import { HbarComponent } from './components/graphics/hbar/hbar.component';
 import { StackedComponent } from './components/graphics/stacked/stacked.component';
 import { TableComponent } from './components/graphics/table/table.component';
 import { WavesModule, TableModule } from 'angular-bootstrap-md';
+import { PieComponent } from './components/graphics/pie/pie.component';
+import { LineComponent } from './components/graphics/line/line.component';
+import { MixedComponent } from './components/graphics/mixed/mixed.component';
 
 
 
@@ -37,7 +40,10 @@ import { WavesModule, TableModule } from 'angular-bootstrap-md';
     LeftsidebarComponent,
     HbarComponent,
     StackedComponent,
-    TableComponent
+    TableComponent,
+    PieComponent,
+    LineComponent,
+    MixedComponent
   ],
   imports: [
     BrowserModule,

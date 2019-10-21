@@ -10,17 +10,28 @@ import { ActivatedRoute } from "@angular/router";
 import { HbarComponent } from "src/app/components/graphics/hbar/hbar.component";
 import { StackedComponent } from "src/app/components/graphics/stacked/stacked.component";
 import { TableComponent } from "src/app/components/graphics/table/table.component";
+import { PieComponent } from "src/app/components/graphics/pie/pie.component";
+import { LineComponent } from "src/app/components/graphics/line/line.component";
+import { MixedComponent } from "src/app/components/graphics/mixed/mixed.component";
 
 import { PokeapiService } from "src/app/pokeapi.service";
 import { faculties } from "src/app/faculties";
 import { menus } from "src/app/topbarMenus";
 import { HttpClient } from "@angular/common/http";
+import { from } from "rxjs";
 
 @Component({
   selector: "app-home",
   templateUrl: "./home.component.html",
   styleUrls: ["./home.component.css"],
-  entryComponents: [HbarComponent, StackedComponent, TableComponent]
+  entryComponents: [
+    HbarComponent,
+    StackedComponent,
+    TableComponent,
+    PieComponent,
+    LineComponent,
+    MixedComponent
+  ]
 })
 export class HomeComponent implements OnInit {
   name;
@@ -32,6 +43,9 @@ export class HomeComponent implements OnInit {
   public showHBar: true;
   public showStacked = true;
   public showTable = true;
+  public showPie = true;
+  public showLine = true;
+  public showMixed = true;
 
   @ViewChild("hbarcontainer", { static: true, read: ViewContainerRef })
   hbarEntry: ViewContainerRef;
@@ -39,6 +53,12 @@ export class HomeComponent implements OnInit {
   stackedEntry: ViewContainerRef;
   @ViewChild("tablecontainer", { static: true, read: ViewContainerRef })
   tableEntry: ViewContainerRef;
+  @ViewChild("piecontainer", { static: true, read: ViewContainerRef })
+  pieEntry: ViewContainerRef;
+  @ViewChild("linecontainer", { static: true, read: ViewContainerRef })
+  lineEntry: ViewContainerRef;
+  @ViewChild("mixedcontainer", { static: true, read: ViewContainerRef })
+  mixedEntry: ViewContainerRef;
 
   constructor(
     private resolver: ComponentFactoryResolver,
@@ -58,50 +78,37 @@ export class HomeComponent implements OnInit {
   sendPostRequest() {
     const json = {
       facultyId: this.faculty.id,
-      menuId: this.getMenuId(this.menu.id)
+      menuId: Conversor.getMenuId(this.menu.id)
     };
 
     this.pokeApi.sendPostRequest(json).subscribe((data: any[]) => {
-      /*
-    switch (this.menu.id) {
-      case 1:
-
-        const hbarFactory = this.resolver.resolveComponentFactory(
-          HbarComponent
-        );
-        const stackedFactory = this.resolver.resolveComponentFactory(
-          StackedComponent
-        );
-        const tableFactory = this.resolver.resolveComponentFactory(
-          TableComponent
-        );
-        this.hbarEntry.createComponent(hbarFactory);
-        this.stackedEntry.createComponent(stackedFactory);
-        this.tableEntry.createComponent(tableFactory);
-
-        // Ejemplo con NumberprojectsComponent
-        // componentRef.instance permite acceder a las variables del componente
-        // que se este llamando en factory
-
-        // testVar de numberprojects.component.ts es la variable que se esta igualando
-        // componentRef.instance.testVar = 'Cualquier valor aqui';
-        break;
-    }
-    */
 
       this.hbarEntry.clear();
       this.stackedEntry.clear();
       this.tableEntry.clear();
+      this.pieEntry.clear();
+      this.lineEntry.clear();
+      this.mixedEntry.clear();
 
-      const hbarFactory = this.resolver.resolveComponentFactory(
-        HbarComponent
-      );
+      const hbarFactory = this.resolver.resolveComponentFactory(HbarComponent);
       const stackedFactory = this.resolver.resolveComponentFactory(
         StackedComponent
       );
       const tableFactory = this.resolver.resolveComponentFactory(
         TableComponent
       );
+      const pieFactory = this.resolver.resolveComponentFactory(PieComponent);
+      const lineFactory = this.resolver.resolveComponentFactory(LineComponent);
+      const mixedFactory = this.resolver.resolveComponentFactory(
+        MixedComponent
+      );
+
+      this.hbarEntry.createComponent(hbarFactory);
+      this.stackedEntry.createComponent(stackedFactory);
+      this.tableEntry.createComponent(tableFactory);
+      this.pieEntry.createComponent(pieFactory);
+      this.lineEntry.createComponent(lineFactory);
+      this.mixedEntry.createComponent(mixedFactory);
 
       switch (this.menu.id) {
         case 1:
@@ -144,52 +151,7 @@ export class HomeComponent implements OnInit {
     window.scroll({
       top: 0,
       left: 0,
-      behavior: "smooth"
+      behavior: 'smooth'
     });
-  }
-
-  getMenuId(menuId: any) {
-    let menu = "";
-    switch (menuId) {
-      case 1:
-        menu = "I01";
-        break;
-      case 2:
-        menu = "I02";
-        break;
-      case 3:
-        menu = "I03";
-        break;
-      case 4:
-        menu = "I04";
-        break;
-      case 5:
-        menu = "I05";
-        break;
-      case 6:
-        menu = "I06";
-        break;
-      case 7:
-        menu = "F01";
-        break;
-      case 8:
-        menu = "F02";
-        break;
-      case 9:
-        menu = "F03";
-        break;
-      case 10:
-        menu = "C01";
-        break;
-      case 11:
-        menu = "C02";
-        break;
-      case 12:
-        menu = "C02.1";
-        break;
-      case 13:
-        menu = "PB03";
-        break;
-    }
   }
 }
