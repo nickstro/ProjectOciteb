@@ -105,8 +105,9 @@ export class HomeComponent implements OnInit {
         case 1:
             this.stackedEntry.createComponent(stackedFactory);
             this.tableEntry.createComponent(tableFactory);
+            this.lineEntry.createComponent(lineFactory);
             const lineConst = this.lineEntry.createComponent(lineFactory);
-            lineConst.instance.title = "Hola vengo de home";
+            lineConst.instance.data = "info";
           break;
         case 2:
             this.tableEntry.createComponent(tableFactory);
