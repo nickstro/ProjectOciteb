@@ -1,22 +1,23 @@
 <mat-sidenav-container>
-  <mat-sidenav-content [ngStyle]="{ 'margin-left.px': contentMargin }">
-    <div class="container">
-      <h1 class="title">Pedidos Clomaker</h1>
-      <hr>
-      <div>
-        <div>
-          <div style="display: block">
-            <canvas baseChart
-              [datasets]="barChartData"
-              [labels]="barChartLabels"
-              [options]="barChartOptions"
-              [plugins]="barChartPlugins"
-              [legend]="barChartLegend"
-              [chartType]="barChartType">
-            </canvas>
-          </div>
-        </div>
-      </div>
-    </div>
+  <mat-sidenav-content>
+  <div class="grafica3">
+    <style>
+      #chartdiv4 {
+        margin-top: 10%;
+        width: 100%;
+        height: 550px;
+      } 
+      </style>
+      
+      <!-- Resources -->
+      <script src="https://www.amcharts.com/lib/4/core.js"></script>
+      <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+      <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+      
+      
+      <!-- HTML -->
+
+      <div id="chartdiv4"></div>
+  </div>
   </mat-sidenav-content>
-  </mat-sidenav-container>
+</mat-sidenav-container>

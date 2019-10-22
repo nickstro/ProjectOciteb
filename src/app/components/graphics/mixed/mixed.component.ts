@@ -10,56 +10,84 @@ am4core.useTheme(am4themes_animated);
   styleUrls: ['./mixed.component.css']
 })
 export class MixedComponent implements OnInit {
-
+  public data;
   private chart: am4charts.XYChart;
   constructor(private zone: NgZone) { }
- 
-
+  dataCopy = [];
+  dataOrder = [];
+  dataKeys = [];
   ngOnInit() {
-    this.zone.runOutsideAngular(() => {
-      let chart = am4core.create("chartdiv2", am4charts.XYChart);
+    this.data.sort((a, b) => a.Anio - b.Anio);
+    // @ts-ignore
+    for (var element of res) {
+      let obj = this.dataOrder.find(e =>
+        e.Anio === element.Anio
+      );
+      if (!obj) {
+        obj = { Anio: element.Anio };
+        this.dataOrder.push(obj);
+      }
+      obj[element.Tipo] = element.Total;
+    }
 
-      chart.data = [{"año":2015,"contrapartida":43,"sinfinaciacion":23,"capitalsemilla":110}];
-      
-      let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-      categoryAxis.dataFields.category = "año";
+    for (var a of this.dataOrder) {
+      this.dataKeys.push(a);
+    }
+
+    var aux = this.dataKeys;
+    for (var i of aux) {
+      if (aux.length = 1) {
+      } else {
+        aux.pop();
+      }
+    }
+    for (var e of aux) {
+      this.dataCopy.push(Object.keys(e));
+    }
+    this.createGraphic();
+  }
+
+  createGraphic() {
+    this.zone.runOutsideAngular(() => {
+      let chart = am4core.create("chartdiv", am4charts.XYChart);
+      chart.data = this.dataOrder;
+      let categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
+      categoryAxis.dataFields.category = "Anio";
+      categoryAxis.renderer.inversed = true;
       categoryAxis.renderer.grid.template.location = 0;
 
-
-      let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-      valueAxis.renderer.inside = true;
-      valueAxis.renderer.labels.template.disabled = true;
-      valueAxis.min = 0;
-      function createSeries(field, name) {
-  
-  // Set up series
+      function createSeries(info1, info2, info3) {
+      let valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
+      valueAxis.renderer.opposite = true;
       let series = chart.series.push(new am4charts.ColumnSeries());
-      series.name = name;
-      series.dataFields.valueY = field;
-      series.dataFields.categoryX = "año";
-      series.sequencedInterpolation = true;
-  
-  // Make it stacked
-      series.stacked = true;
-  
-  // Configure columns
-      series.columns.template.width = am4core.percent(60);
-      series.columns.template.tooltipText = "[bold]{name}[/]\n[font-size:14px]{categoryX}: {valueY}";
-  
-  // Add label
-      let labelBullet = series.bullets.push(new am4charts.LabelBullet());
-      labelBullet.label.text = "{valueY}";
-      labelBullet.locationY = 0.5;
-  
-    return series;
-}
-    createSeries("contrapartida", "Contrapartida");
-    createSeries("sinfinaciacion", "Sinfinaciacion");
-    createSeries("capitalsemilla", "Capitalsemilla");
+      series.dataFields.categoryY = info1;
+      series.dataFields.valueX = info2;
+      series.name = info2;
+      series.columns.template.fillOpacity = 0.5;
+      series.columns.template.strokeOpacity = 0;
+      series.tooltipText = "Resultados {categoryY}: {valueX.value}";
+      let lineSeries = chart.series.push(new am4charts.LineSeries());
+      lineSeries.dataFields.categoryY = info1;
+      lineSeries.dataFields.valueX = info2;
+      lineSeries.name = info2;
+      lineSeries.strokeWidth = 3;
+      lineSeries.tooltipText = "Datos {categoryY}: {valueX.value}";
+      let circleBullet = lineSeries.bullets.push(new am4charts.CircleBullet());
+      circleBullet.circle.fill = am4core.color("#fff");
+      circleBullet.circle.strokeWidth = 2;
+      return series;
+    }
 
-    chart.legend = new am4charts.Legend();
-  });
+    for (var j of this.dataCopy) {
+      createSeries("Anio", j[2],j[3]);
+    }
 
+      //add chart cursor
+      chart.cursor = new am4charts.XYCursor();
+      chart.cursor.behavior = "zoomY";
 
+      //add legend
+      chart.legend = new am4charts.Legend();
+    });
   }
 }

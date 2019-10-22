@@ -1,24 +1,21 @@
 <mat-sidenav-container>
-    <mat-sidenav-content [ngStyle]="{ 'margin-left.px': contentMargin }">
-  <div class="grafica2">
-    <h1>
-      Ejemplo Grafica line Chart
-    </h1>
-    <div class="flex">
-      <div class="flex-item">
-        <canvas baseChart width="300" height="300"
-                    [datasets]="lineChartData"
-                    [labels]="lineChartLabels"
-                    [options]="lineChartOptions"
-                    [colors]="lineChartColors"
-                    [legend]="lineChartLegend"
-                    [chartType]="lineChartType"
-                    [plugins]="lineChartPlugins"
-                    (chartHover)="chartHovered($event)"
-                    (chartClick)="chartClicked($event)">
-                  </canvas>
-      </div>
-    </div>
+  <mat-sidenav-content>
+  <div class="grafica3">
+    <style>
+      #chartdiv3 {
+        width: 100%;
+        height: 550px;
+      } 
+      </style>
+      
+      <!-- Resources -->
+      <script src="https://www.amcharts.com/lib/4/core.js"></script>
+      <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+      <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+      
+      
+      <!-- HTML -->
+      <div id="chartdiv3"></div>
   </div>
-</mat-sidenav-content>
+  </mat-sidenav-content>
 </mat-sidenav-container>
