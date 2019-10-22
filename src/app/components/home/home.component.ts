@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
   menu;
   apiResponse;
 
-  public showHBar: true;
+  public showHBar = true;
   public showStacked = true;
   public showTable = true;
   public showPie = true;
@@ -80,6 +80,8 @@ export class HomeComponent implements OnInit {
       facultyId: this.faculty.id,
       menuId: Conversor.getMenuId(this.menu.id)
     };
+
+    console.log(json);
 
     this.pokeApi.sendPostRequest(json).subscribe((data: any[]) => {
 
