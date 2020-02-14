@@ -1,12 +1,10 @@
-import { PokeapiService } from './pokeapi.service';
+import { OcitebService } from './ociteb.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
-import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
-import { DropdownlistComponent } from './components/dropdownlist/dropdownlist.component';
 import { ChartsModule } from 'ng2-charts';
 
 /**
@@ -14,13 +12,13 @@ import { ChartsModule } from 'ng2-charts';
  */
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
+import {MatGridListModule} from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import {MatCardModule} from '@angular/material';
 import {MatToolbarModule} from '@angular/material';
 import {MatMenuModule} from '@angular/material';
-import { LeftsidebarComponent } from './components/leftsidebar/leftsidebar.component';
 import { HbarComponent } from './components/graphics/hbar/hbar.component';
 import { StackedComponent } from './components/graphics/stacked/stacked.component';
 import { TableComponent } from './components/graphics/table/table.component';
@@ -28,6 +26,10 @@ import { WavesModule, TableModule } from 'angular-bootstrap-md';
 import { PieComponent } from './components/graphics/pie/pie.component';
 import { LineComponent } from './components/graphics/line/line.component';
 import { MixedComponent } from './components/graphics/mixed/mixed.component';
+import { CardMenuComponent } from './components/card-menu/card-menu.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
+import { InformationComponent } from './components/information/information.component';
+import { GraphicsScreenComponent } from './components/graphics-screen/graphics-screen.component';
 
 
 
@@ -35,19 +37,21 @@ import { MixedComponent } from './components/graphics/mixed/mixed.component';
   declarations: [
     AppComponent,
     HomeComponent,
-    PagenotfoundComponent,
-    DropdownlistComponent,
-    LeftsidebarComponent,
     HbarComponent,
     StackedComponent,
     TableComponent,
     PieComponent,
     LineComponent,
-    MixedComponent
+    MixedComponent,
+    CardMenuComponent,
+    WelcomeComponent,
+    InformationComponent,
+    GraphicsScreenComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    MatGridListModule,
     MatButtonModule,
     MatIconModule,
     MatSidenavModule,
@@ -62,7 +66,7 @@ import { MixedComponent } from './components/graphics/mixed/mixed.component';
     HttpClientModule
   ],
   providers: [
-    PokeapiService,
+    OcitebService,
   ],
   bootstrap: [AppComponent]
 })

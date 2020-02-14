@@ -1,20 +1,3 @@
-.main-toolbar{
-  background-color: #F9DD00;
-}
-
-.navbar-container {
-  
-  width: 100%;
-}
-
-.main-title{
-  color: black;
-}
-
-.main-sidenav{
-  background-color: black;
-}
-
-.text-toolbar{
-  color: white;
+.mat-toolbar {
+  background-color: gray;
 }

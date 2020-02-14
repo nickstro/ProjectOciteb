@@ -1,0 +1,13 @@
+<div>
+  <h1 style="text-align: center; color: black;">{{menuTitle}}</h1>
+</div>
+
+<div class="card-columns mt-3">
+  <div class="card" *ngFor="let card of cardList" >
+    <img src="assets/img/code.png" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{card.name}}</h5>
+      <a style="width: 100%;" mat-raised-button [routerLink]="['/menus', card.id, 'tabs', 1]">Entrar</a>
+    </div>
+  </div>
+</div>

@@ -6,7 +6,8 @@ import { Component,  } from '@angular/core';
   styleUrls: ['./stacked.component.css']
 })
 export class StackedComponent {
-  public barChartOptions: any ={
+  data;
+  public barChartOptions: any = {
     scales: {
       xAxes: [{
           stacked: true
@@ -16,17 +17,16 @@ export class StackedComponent {
       }]
   },
     responsive : true };
-  public barChartLabels: string[] = [ '2013', '2014', '2015','2016', '2017', '2018', '2019'];
+  public barChartLabels: string[] = [ '2014', '2015', '2016', '2017', '2018'];
   public barChartType: string = 'bar';
   public barChartLegend = true;
   public barChartPlugins = true;
 
-  public barChartData: any[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Pedidos colegios ' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Pedidos particulares' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Pedidos particulares' }
-  ];
-
+ public barChartData: any[] = [
+  { data: [65, 59, 80, 81, 56], label: 'Capital Semilla ' },
+  { data: [28, 48, 40, 19, 86], label: 'Contrapartida' },
+  { data: [28, 48, 40, 19, 86], label: 'Sin financiacion' }
+];
 
   // events
   public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {

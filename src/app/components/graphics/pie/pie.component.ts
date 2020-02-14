@@ -10,8 +10,10 @@ am4core.useTheme(am4themes_animated);
   styleUrls: ['./pie.component.css']
 })
 export class PieComponent implements OnInit{
- 
+
   public data;
+
+
   private chart: am4charts.XYChart;
 
   constructor(private zone: NgZone) { }
@@ -19,9 +21,8 @@ export class PieComponent implements OnInit{
   dataOrder = [];
   dataKeys = [];
   ngOnInit() {
-    this.data.sort((a, b) => a.Anio - b.Anio);
     // @ts-ignore
-    for (var element of res) {
+    for (var element of this.data) {
       let obj = this.dataOrder.find(e =>
         e.Anio === element.Anio
       );
@@ -56,10 +57,10 @@ export class PieComponent implements OnInit{
       let chart = am4core.create("chartdiv", am4charts.PieChart3D);
       chart.hiddenState.properties.opacity = 0;
       // ... chart code goes here ...
-      
+
       //chart.data = [{anio: "2014",valor: 43},{anio: "2015",valor: 28}];
       chart.data = this.dataOrder;
-      
+
       chart.innerRadius = am4core.percent(40);
       chart.depth = 120;
 
@@ -72,7 +73,7 @@ export class PieComponent implements OnInit{
         series.colors.step = 3;
           return series;
         }
-      for(var j of this.dataCopy){          
+      for(var j of this.dataCopy){
          createSeries("Anio",j[2]);
       }
     });

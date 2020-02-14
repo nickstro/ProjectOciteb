@@ -17,9 +17,8 @@ export class MixedComponent implements OnInit {
   dataOrder = [];
   dataKeys = [];
   ngOnInit() {
-    this.data.sort((a, b) => a.Anio - b.Anio);
     // @ts-ignore
-    for (var element of res) {
+    for (var element of this.data) {
       let obj = this.dataOrder.find(e =>
         e.Anio === element.Anio
       );
@@ -50,9 +49,10 @@ export class MixedComponent implements OnInit {
   createGraphic() {
     this.zone.runOutsideAngular(() => {
       let chart = am4core.create("chartdiv", am4charts.XYChart);
-      chart.data = this.dataOrder;
+      chart.data = this.data;
+      console.log(chart.data);
       let categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
-      categoryAxis.dataFields.category = "Anio";
+      categoryAxis.dataFields.category = "Tipo";
       categoryAxis.renderer.inversed = true;
       categoryAxis.renderer.grid.template.location = 0;
 

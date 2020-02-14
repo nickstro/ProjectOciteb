@@ -9,6 +9,7 @@ am4core.useTheme(am4themes_animated);
   templateUrl: './line.component.html',
   styleUrls: ['./line.component.css']
 })
+
 export class LineComponent implements OnInit {
   public data;
   private chart: am4charts.XYChart;
@@ -17,9 +18,9 @@ export class LineComponent implements OnInit {
   dataOrder = [];
   dataKeys = [];
   ngOnInit() {
-    this.data.sort((a, b) => a.Anio - b.Anio);
+    console.log(this.data);
     // @ts-ignore
-    for (var element of res) {
+    for (var element of this.data) {
       let obj = this.dataOrder.find(e =>
         e.Anio === element.Anio
       );

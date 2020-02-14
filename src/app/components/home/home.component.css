@@ -25,10 +25,12 @@ button {
 }
 
 .container-fluid {
+  background-color: white;
   padding-top: 20px;
 }
 
 .col-md-8 {
+  background-color: white;
   float: inherit;
   margin: 15px;
   padding-left: 70px;

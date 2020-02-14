@@ -1,0 +1,59 @@
+<div #mainmenu style="background-color: black;">
+  <mat-toolbar class="example-toolbar">
+    <mat-toolbar-row>
+      <button mat-button [matMenuTriggerFor]="inversionMenu">Inversión</button>
+      <mat-menu #inversionMenu="matMenu">
+        <div *ngFor="let formationMenu of menus">
+          <button
+            mat-menu-item
+            *ngIf="formationMenu.type === 1" mat-menu-item
+          >
+            {{formationMenu.name}}
+          </button>
+        </div>
+      </mat-menu>
+
+      <button mat-button [matMenuTriggerFor]="formationMenu">Formación</button>
+      <mat-menu #formationMenu="matMenu" yPosition="above">
+        <div *ngFor="let formationMenu of menus">
+          <button
+            mat-menu-item
+            *ngIf="formationMenu.type === 2"
+            [routerLink]="['/faculties', faculty.id, 'menus', formationMenu.id]"
+          >
+            {{ formationMenu.name }}
+          </button>
+        </div>
+      </mat-menu>
+
+      <button mat-button [matMenuTriggerFor]="capacityMenu">Capacidades</button>
+      <mat-menu #capacityMenu="matMenu" yPosition="above">
+        <div *ngFor="let capacityMenu of menus">
+          <button
+            mat-menu-item
+            *ngIf="capacityMenu.type === 3"
+            [routerLink]="['/faculties', faculty.id, 'menus', capacityMenu.id]"
+          >
+            {{ capacityMenu.name }}
+          </button>
+        </div>
+      </mat-menu>
+
+      <button mat-button [matMenuTriggerFor]="productionMenu">
+        Producción Bibliográfica
+      </button>
+      <mat-menu #productionMenu="matMenu" yPosition="above">
+        <div *ngFor="let productionMenu of menus">
+          <button
+            mat-menu-item
+            *ngIf="productionMenu.type === 4"
+            [routerLink]="['/faculties', faculty.id, 'menus', productionMenu.id
+            ]"
+          >
+            {{ productionMenu.name }}
+          </button>
+        </div>
+      </mat-menu>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>

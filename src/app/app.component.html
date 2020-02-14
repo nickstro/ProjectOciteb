@@ -1,31 +1,87 @@
-<mat-toolbar id="mainToolbar" class="main-toolbar">
-  <mat-toolbar-row>
-    <button mat-icon-button (click)="sidenav.toggle()">
-      <mat-icon class="main-title">menu</mat-icon>
-    </button>
-    <h1 class="main-title">Ocibet Project</h1>
-  </mat-toolbar-row>
+<mat-toolbar id="mainToolbar">
+  <mat-icon
+    (click)="onToolbarMenuToggle()"
+    id="toolbarMenu">subject</mat-icon>
+    <h1>Observatorio de Ciencia, Innovación y Tecnologia de Boyacá</h1>
 </mat-toolbar>
 
 <mat-sidenav-container
-  class="example-sidenav-container"
   id="sidenavContainer"
-  fullscreen
->
-  <mat-sidenav mode="over" #sidenav>
-    <mat-nav-list>
-      <mat-list-item
-        *ngFor="let faculty of faculties"
-        [routerLink]="['/faculties', faculty.id, 'menus', 1]"
-        (click)="sidenav.toggle()"
-      >
-        <mat-icon>work</mat-icon>
-        {{ faculty.name }}
+ fullscreen>
+  <mat-sidenav
+    mode="side"
+    #sidenav
+    id="sidenav"
+    [class.menu-open]="isMenuOpen"
+    [class.menu-close]="!isMenuOpen"
+    opened>
+
+    <mat-list id="menus">
+
+      <mat-list-item>
+        <button
+        class="menu-item"
+          mat-flat-button
+          (click)="onToolbarMenuToggle()"
+          [routerLink]="['/']">
+          <mat-icon>home</mat-icon>
+          <a *ngIf="isMenuOpen">Inicio</a>
+
+        </button>
       </mat-list-item>
-    </mat-nav-list>
+
+      <mat-list-item>
+        <button
+        class="menu-item"
+          mat-flat-button
+          (click)="onToolbarMenuClose()"
+          [routerLink]="['/cardMenu', 1]">
+          <mat-icon>business</mat-icon>
+          <a *ngIf="isMenuOpen">Facultades</a>
+
+        </button>
+      </mat-list-item>
+
+      <mat-list-item>
+        <button
+        class="menu-item"
+          mat-flat-button
+          (click)="onToolbarMenuClose()"
+          [routerLink]="['/cardMenu', 2]">
+          <mat-icon>search</mat-icon>
+          <a *ngIf="isMenuOpen">Grupos de investigacion</a>
+        </button>
+      </mat-list-item>
+
+      <mat-list-item>
+        <button
+        class="menu-item"
+          mat-flat-button
+          (click)="onToolbarMenuClose()"
+          [routerLink]="['/cardMenu', 3]">
+          <mat-icon>school</mat-icon>
+          <a *ngIf="isMenuOpen">Escuelas</a>
+      </button>
+      </mat-list-item>
+
+      <mat-list-item>
+        <button
+        class="menu-item"
+          mat-flat-button
+          (click)="onToolbarMenuClose()"
+          [routerLink]="['/information']">
+          <mat-icon>info</mat-icon>
+          <a *ngIf="isMenuOpen">Informacion</a>
+      </button>
+      </mat-list-item>
+
+    </mat-list>
   </mat-sidenav>
 
-  <mat-sidenav-content class="navbar-container">
-    <router-outlet></router-outlet>
+  <mat-sidenav-content style="background-color: white;"
+  [ngStyle]="{ 'margin-left.px': contentMargin }"
+  >
+    <router-outlet>
+    </router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

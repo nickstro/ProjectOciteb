@@ -1,6 +1,7 @@
+import { menus } from './topbarMenus';
 import { Component } from '@angular/core';
 
-import { faculties } from 'src/app/faculties';
+import { menu } from 'src/app/menu';
 
 @Component({
   selector: 'app-root',
@@ -10,5 +11,22 @@ import { faculties } from 'src/app/faculties';
 
 export class AppComponent {
   title = 'OcitebProject';
-  faculties = faculties;
+  isMenuOpen = false;
+  menus = menu;
+  contentMargin = 240;
+
+  onToolbarMenuToggle() {
+    this.isMenuOpen = !this.isMenuOpen;
+
+    if (!this.isMenuOpen) {
+      this.contentMargin = 70;
+    } else {
+      this.contentMargin = 240;
+    }
+  }
+
+  onToolbarMenuClose() {
+    this.isMenuOpen = false;
+    this.contentMargin = 70;
+  }
 }

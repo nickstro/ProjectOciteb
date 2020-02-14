@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LeftsidebarComponent } from './leftsidebar.component';
+import { GraphicsScreenComponent } from './graphics-screen.component';
 
-describe('LeftsidebarComponent', () => {
-  let component: LeftsidebarComponent;
-  let fixture: ComponentFixture<LeftsidebarComponent>;
+describe('GraphicsScreenComponent', () => {
+  let component: GraphicsScreenComponent;
+  let fixture: ComponentFixture<GraphicsScreenComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LeftsidebarComponent ]
+      declarations: [ GraphicsScreenComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LeftsidebarComponent);
+    fixture = TestBed.createComponent(GraphicsScreenComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
