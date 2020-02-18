@@ -32,7 +32,6 @@ import { InformationComponent } from './components/information/information.compo
 import { GraphicsScreenComponent } from './components/graphics-screen/graphics-screen.component';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,

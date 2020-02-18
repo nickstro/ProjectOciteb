@@ -15,6 +15,10 @@ export class AppComponent {
   menus = menu;
   contentMargin = 240;
 
+  onFloatClick() {
+    console.log('Click');
+  }
+
   onToolbarMenuToggle() {
     this.isMenuOpen = !this.isMenuOpen;
 

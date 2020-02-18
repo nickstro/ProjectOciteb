@@ -1,3 +1,9 @@
 .mat-toolbar {
   background-color: gray;
 }
+
+.mat-fab {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+}
