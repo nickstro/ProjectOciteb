@@ -1,8 +1,6 @@
-import { Component, OnInit, NgZone } from '@angular/core';
-import * as am4core from "@amcharts/amcharts4/core";
-import * as am4charts from "@amcharts/amcharts4/charts";
-import am4themes_animated from "@amcharts/amcharts4/themes/animated";
-am4core.useTheme(am4themes_animated);
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChartDataSets, ChartOptions } from 'chart.js';
+import { Color, BaseChartDirective, Label } from 'ng2-charts';
 
 @Component({
   selector: 'app-line',
@@ -12,88 +10,78 @@ am4core.useTheme(am4themes_animated);
 
 export class LineComponent implements OnInit {
   public data;
-  private chart: am4charts.XYChart;
-  constructor(private zone: NgZone) { }
-  dataCopy = [];
-  dataOrder = [];
-  dataKeys = [];
-  ngOnInit() {
-    console.log(this.data);
-    // @ts-ignore
-    for (var element of this.data) {
-      let obj = this.dataOrder.find(e =>
-        e.Anio === element.Anio
-      );
-      if (!obj) {
-        obj = { Anio: element.Anio };
-        this.dataOrder.push(obj);
-      }
-      obj[element.Tipo] = element.Total;
-    }
+  public type;
 
-    for (var a of this.dataOrder) {
-      this.dataKeys.push(a);
-    }
-
-    var aux = this.dataKeys;
-    for (var i of aux) {
-      if (aux.length = 1) {
-      } else {
-        aux.pop();
-      }
-    }
-    for (var e of aux) {
-      this.dataCopy.push(Object.keys(e));
-    }
-    this.createGraphic();
-  }
-
-  createGraphic() {
-    this.zone.runOutsideAngular(() => {
-      let chart = am4core.create("chartdiv3", am4charts.XYChart);
-      chart.data = this.dataOrder;
-
-      // Create category axis
-      let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-      categoryAxis.dataFields.category = "Anio";
-      categoryAxis.renderer.opposite = true;
-
-      // Create value axis
-      let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-      valueAxis.renderer.inversed = true;
-      valueAxis.title.text = "Resultados";
-      valueAxis.renderer.minLabelPosition = 0.01;
-
-      // Create series
-      function createSeries(info1, info2, info3) {
-        let series = chart.series.push(new am4charts.LineSeries());
-        series.dataFields.valueY = info2;
-        series.dataFields.categoryX = info1;
-        series.name = info3;
-        series.strokeWidth = 3;
-        series.bullets.push(new am4charts.CircleBullet());
-        series.tooltipText = "Place taken by {name} in {categoryX}: {valueY}";
-        series.legendSettings.valueText = "{valueY}";
-        series.visible = false;
-        return series;
-      }
-
-
-      for (var j of this.dataCopy) {
-        var contador = Object.keys(j).length;
-        for (var i = 1; i < contador; i++) {
-          createSeries("Anio", j[i], j[i]);
+  public lineChartData: ChartDataSets[] = [];
+  public lineChartLabels: Label[] = [];
+  public lineChartOptions: (ChartOptions & { annotation: any }) = {
+    responsive: true,
+    scales: {
+      // We use this empty structure as a placeholder for dynamic theming.
+      xAxes: [{}],
+      yAxes: [
+        {
+          id: 'y-axis-0',
+          position: 'left',
+        },
+        {
+          id: 'y-axis-1',
+          position: 'right',
+          gridLines: {
+            color: 'rgba(255,0,0,0.3)',
+          },
+          ticks: {
+            fontColor: 'red',
+          }
         }
-      }
+      ]
+    },
+    annotation: {
+      annotations: [
+        {
+          type: 'line',
+          mode: 'vertical',
+          scaleID: 'x-axis-0',
+          value: 'March',
+          borderColor: 'orange',
+          borderWidth: 2,
+          label: {
+            enabled: true,
+            fontColor: 'orange',
+            content: 'LineAnno'
+          }
+        },
+      ],
+    },
+  };
+  public lineChartLegend = true;
+  public lineChartType = 'line';
+  // public lineChartPlugins = [pluginAnnotations];
 
-      // Add chart cursor
-      chart.cursor = new am4charts.XYCursor();
-      chart.cursor.behavior = "zoomY";
+  @ViewChild(BaseChartDirective, { static: true }) chart: BaseChartDirective;
 
-      // Add legend
-      chart.legend = new am4charts.Legend();
-    });
+  constructor() { }
+
+  ngOnInit() {
+    switch (this.type) {
+      case 1:
+        let aporteEspecie = {data: [],
+          label: 'Aporte Especie'};
+        let aporteEfectivo = {data: [],
+          label: 'Aporte Efectivo'};
+        let aporteExterno = {data: [],
+          label: 'Aporte Externo'};
+        for (const element of this.data) {
+          this.lineChartLabels.push(element.anio);
+          aporteEspecie.data.push(element.AporteEspecie);
+          aporteEfectivo.data.push(element.AporteEfectivo);
+          aporteExterno.data.push(element.AporteExterno);
+        }
+        this.lineChartData.push(aporteEspecie, aporteEfectivo, aporteExterno);
+        break;
+      case 2:
+
+        break;
+    }
   }
 }
-
-

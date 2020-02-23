@@ -85,10 +85,14 @@ export class HomeComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.faculty = faculties[+params.get("facultyId") - 1];
       this.menu = menus[+params.get("menuId") - 1];
+      /*
       this.cancelRequest();
       this.sendPostRequest();
+      */
     });
   }
+
+  /*
 
   cancelRequest() {
     if (this.request != null) {
@@ -399,4 +403,5 @@ export class HomeComponent implements OnInit {
     }
     return menu;
   }
+  */
 }

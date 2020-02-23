@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { faculties } from 'src/app/faculties';
 import { schools } from 'src/app/schools';
 import { investigationGroups } from 'src/app/investigationGroups';
+import { MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-card-menu',
@@ -14,6 +15,8 @@ export class CardMenuComponent implements OnInit {
   menuId;
   cardList;
   menuTitle;
+  searchText: string;
+  dataSource;
 
   constructor(
     private route: ActivatedRoute
@@ -23,31 +26,30 @@ export class CardMenuComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.menuId = params.get('menuId');
       this.loadCardMenu(parseInt(this.menuId, 10));
+      this.dataSource = new MatTableDataSource(this.cardList);
     });
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   loadCardMenu(menuId) {
     switch (menuId) {
       case 1:
         // Facultades
-        console.log('Menu ' + menuId);
         this.menuTitle = 'Facultades';
         this.cardList = faculties;
-        console.log(this.cardList);
         break;
       case 2:
         // Grupos de investigacion
-        console.log('Menu ' + menuId);
         this.menuTitle = 'Grupos de investigacion';
         this.cardList = investigationGroups;
-        console.log(this.cardList);
         break;
       case 3:
         // Escuelas
-        console.log('Menu ' + menuId);
         this.menuTitle = 'Escuelas';
         this.cardList = schools;
-        console.log(this.cardList);
         break;
     }
   }

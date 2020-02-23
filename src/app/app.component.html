@@ -47,7 +47,7 @@
         class="menu-item"
           mat-flat-button
           (click)="onToolbarMenuClose()"
-          [routerLink]="['/cardMenu', 2]">
+          [routerLink]="['/menus', 12, 'tabs', 1]">
           <mat-icon>search</mat-icon>
           <a *ngIf="isMenuOpen">Grupos de investigacion</a>
         </button>
@@ -58,7 +58,7 @@
         class="menu-item"
           mat-flat-button
           (click)="onToolbarMenuClose()"
-          [routerLink]="['/cardMenu', 3]">
+          [routerLink]="['/menus', 13, 'tabs', 1]">
           <mat-icon>school</mat-icon>
           <a *ngIf="isMenuOpen">Escuelas</a>
       </button>
@@ -78,14 +78,11 @@
     </mat-list>
 
     <button mat-fab (click)="onFloatClick()">
-      <mat-icon>favorite</mat-icon>
+      <mat-icon>search</mat-icon>
     </button>
   </mat-sidenav>
 
-  <mat-sidenav-content style="background-color: white;"
-  [ngStyle]="{ 'margin-left.px': contentMargin }"
-  >
+  <mat-sidenav-content [ngStyle]="{ 'margin-left.px': contentMargin }">
     <router-outlet></router-outlet>
-
   </mat-sidenav-content>
 </mat-sidenav-container>

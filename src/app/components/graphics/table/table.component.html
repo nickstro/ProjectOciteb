@@ -4,11 +4,26 @@
         <th *ngFor="let head of headL" scope="col">{{head}} </th>
       </tr>
     </thead>
-    <tbody>
-      <tr mdbTableCol *ngFor="let el of datos">
+    <tbody *ngIf="type === 1 || type === 2">
+      <tr mdbTableCol *ngFor="let el of datos" >
         <th scope="row">{{el.id}}</th>
         <td>{{el.first}}</td>
-        <td>{{el.last}}</td>
+        <td>{{el.second}}</td>
+        <td>{{el.third}}</td>
+        <td>{{el.fourth}}</td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="type === 3">
+      <tr mdbTableCol *ngFor="let el of datos" >
+        <th scope="row">{{el.id}}</th>
+        <td>{{el.first}}</td>
+        <td>{{el.second}}</td>
+        <td>{{el.third}}</td>
+        <td>{{el.fourth}}</td>
+        <td>{{el.five}}</td>
+        <td>{{el.six}}</td>
+        <td>{{el.seven}}</td>
       </tr>
     </tbody>
   </table>

@@ -9,9 +9,6 @@ export const faculties = [
         id: 3,
         name: 'Ciencias de la Educación',
     }, {
-        id: 4,
-        name: 'Ciencias de la salud',
-    }, {
         id: 5,
         name: 'Ciencias Económicas y Administrativas',
     }, {
@@ -20,9 +17,6 @@ export const faculties = [
     }, {
         id: 7,
         name: 'Estudios a distancia',
-    }, {
-        id: 8,
-        name: 'Ingenieria',
     }, {
         id: 9,
         name: 'Chiquinquira',

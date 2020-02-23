@@ -11,12 +11,6 @@ export class TableComponent {
   data;
   type;
 
-  elements: any = [
-    {id: 1, first: 'Mark', last: 'Otto', handle: '@mdo'},
-    {id: 2, first: 'Jacob', last: 'Thornton', handle: '@fat'},
-    {id: 3, first: 'Larry', last: 'the Bird', handle: '@twitter'},
-  ];
-
   datos: any = [];
 
   headElements = ['Año', 'Tipo', 'Total'];
@@ -24,16 +18,58 @@ export class TableComponent {
 
   ngOnInit(): void {
 
-    if(this.type == 1){
-      this.headL.push('Año', 'Tipo', 'Total');
-    }else if(this.type == 2){
-      this.headL.push('Grupo', 'Numero de elementos', 'Valor');
-    }
+    switch (this.type) {
+      case 1:
+        this.headL.push('Año', 'Capital Semilla', 'Contrapartida', 'Sin financiacion', 'Total Proyectos');
+        let years = groupBy(this.data, 'anio');
+        console.log(years);
+        break;
+      case 2:
+        this.headL.push('Año', 'Aporte Especie UPTC', 'Aporte Efectivo UPTC', 'Aporte Externo', 'Total Proyectos');
+        for (let element of this.data) {
+          this.datos.push({id: element.anio,
+          first: element.AporteEspecie,
+          second: element.AporteEfectivo,
+          third: element.AporteExterno,
+          fourth: element.totalDinero});
+        }
+        break;
+      case 3:
+        this.headL.push('Año', 'Centro de investigación y desarrollo tecnológico', 'Colciencias',
+                        'Empresas', 'Entidades del gobierno central', 'Entidades del gobierno regional',
+                        'Instituciones de educacion superior', 'Total');
 
-    for (var element of this.data) {
-      this.datos.push({'id': element.Anio,
-        'first': element.Tipo,
-        'last': element.Total});
+        let year2014 = [{id: '2014'}];
+        let year2015 = [{id: '2015'}];
+        let year2016 = [{id: '2016'}];
+        let year2017 = [{id: '2017'}];
+        let year2018 = [{id: '2018'}];
+
+        for (let element of this.data) {
+          /*
+          this.datos.push({id: element.anio,
+          first: element.totalEntidadExterna,
+          second: element.totalEntidadExterna,
+          third: element.totalEntidadExterna,
+          fourth: element.totalEntidadExterna,
+          five: element.totalEntidadExterna,
+          six: element.totalEntidadExterna,
+          seven: element.totalEntidadExterna}
+          );
+          */
+        }
+        this.datos.push(year2014, year2015, year2016, year2017, year2018);
+          break;
     }
   }
+   groupBy = (list: any [], element: any) => {
+    return this.data.reduce((list: any[], actual: any) => {
+     const key = actual[element];
+     if (!list[key]) {
+         list[key] = [];
+     }
+     list[key].push(actual);
+     return list;
+   });
+ };
 }

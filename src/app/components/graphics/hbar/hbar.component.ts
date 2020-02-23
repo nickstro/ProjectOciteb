@@ -1,81 +1,73 @@
-import { Component, OnInit, NgZone } from '@angular/core';
-import * as am4core from '@amcharts/amcharts4/core';
-import * as am4charts from '@amcharts/amcharts4/charts';
-import am4themes_animated from '@amcharts/amcharts4/themes/animated';
-am4core.useTheme(am4themes_animated);
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-hbar',
-  templateUrl: './hbar.component.html',
-  styleUrls: ['./hbar.component.css']
+  selector: 'barchart',
+  templateUrl: './hbar.component.html'
 })
-export class HbarComponent implements OnInit {
+export class HbarComponent {
+  data;
 
-  public data;
-  private chart: am4charts.XYChart;
-
-  constructor(private zone: NgZone) { }
-  dataCopy = [];
-  dataOrder = [];
-  dataKeys = [];
-  ngOnInit() {
-    // @ts-ignore
-    for (var element of this.data) {
-      let obj = this.dataOrder.find(e =>
-        e.Anio === element.Anio
-      );
-      if (!obj) {
-        obj = { Anio: element.Anio };
-        this.dataOrder.push(obj);
-      }
-      obj[element.Tipo] = element.Total;
+  public barChartOptions:any = {
+    scaleShowVerticalLines: false,
+    responsive: true,
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        },
+        scaleLabel: {
+          display: true,
+          labelString: 'Numero de Proyectos'
+        }
+      }]
     }
+  };
 
-    for (var a of this.dataOrder) {
-      this.dataKeys.push(a);
+    // X
+    public mbarChartLabels:string[] = [];
+    public barChartType:string = 'bar';
+    public barChartLegend:boolean = false;
+
+    public barChartColors:Array<any> = [
+    {
+      backgroundColor: 'rgba(105,159,177,0.2)',
+      borderColor: 'rgba(105,159,177,1)',
+      pointBackgroundColor: 'rgba(105,159,177,1)',
+      pointBorderColor: '#fafafa',
+      pointHoverBackgroundColor: '#fafafa',
+      pointHoverBorderColor: 'rgba(105,159,177)'
+    },
+    {
+      backgroundColor: 'rgba(77,20,96,0.3)',
+      borderColor: 'rgba(77,20,96,1)',
+      pointBackgroundColor: 'rgba(77,20,96,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(77,20,96,1)'
     }
+  ];
+    public barChartData:any[] = [
+      {data: []}
+    ];
 
-    var aux = this.dataKeys;
-    for (var i of aux) {
-      if (aux.length = 1) {
+  ngOnInit(): void {
+    console.log(this.data);
+    let years = [];
+    let year = 2014;
+    let value = 0;
+    for (let index = 0; index < this.data.length; index++) {
+      const element = this.data[index];
+      years.push(element.anio);
+      if (element.anio === year) {
+        value += element.total;
       } else {
-        aux.pop();
+        this.barChartData[0].data.push(value);
+        value = 0;
+        index--;
+        year = element.anio;
       }
     }
-    for (var e of aux) {
-      this.dataCopy.push(Object.keys(e));
-    }
-    this.createGraphic();
-  }
 
-  createGraphic() {
-    this.zone.runOutsideAngular(() => {
-      let chart = am4core.create('chartdiv', am4charts.XYChart);
-      chart.data = this.dataOrder;
-      console.log(this.data);
-
-      let categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
-      categoryAxis.dataFields.category = 'Anio';
-      categoryAxis.numberFormatter.numberFormat = '#';
-      categoryAxis.renderer.inversed = true;
-
-      let valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
-
-      // Create series
-      function createSeries(info1, info2) {
-        let series = chart.series.push(new am4charts.ColumnSeries3D());
-        series.dataFields.valueX = info2;
-        series.dataFields.categoryY = info1;
-        series.name = info2;
-        series.columns.template.propertyFields.fill = 'color';
-        series.columns.template.tooltipText = '{valueX}';
-        series.columns.template.column3D.stroke = am4core.color('#fff');
-        series.columns.template.column3D.strokeOpacity = 0.2;
-        return series;
-      }
-      for (var j of this.dataCopy) {
-        createSeries('Anio', j[2]);
-      }
-    });
+    this.mbarChartLabels = [...new Set(years)];
   }
 }

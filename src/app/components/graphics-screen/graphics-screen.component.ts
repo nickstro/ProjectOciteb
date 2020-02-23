@@ -1,4 +1,3 @@
-import { menu } from 'src/app/menu';
 import {
   Component,
   OnInit,
@@ -7,9 +6,9 @@ import {
   ComponentFactoryResolver
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { faculties } from 'src/app/faculties';
+import {Apollo} from 'apollo-angular';
 import { menus } from 'src/app/topbarMenus';
+import { querys } from 'src/app/querys';
 
 import { HbarComponent } from 'src/app/components/graphics/hbar/hbar.component';
 import { StackedComponent } from 'src/app/components/graphics/stacked/stacked.component';
@@ -32,11 +31,14 @@ import { MixedComponent } from 'src/app/components/graphics/mixed/mixed.componen
   ]
 })
 export class GraphicsScreenComponent implements OnInit {
-
-  menus = menus;
-  faculty;
-  menu;
-  request;
+  hbarFactory = this.resolver.resolveComponentFactory(HbarComponent);
+  stackedFactory = this.resolver.resolveComponentFactory(
+      StackedComponent
+    );
+  tableFactory = this.resolver.resolveComponentFactory(TableComponent);
+  pieFactory = this.resolver.resolveComponentFactory(PieComponent);
+  lineFactory = this.resolver.resolveComponentFactory(LineComponent);
+  mixedFactory = this.resolver.resolveComponentFactory(MixedComponent);
 
   @ViewChild('hbarcontainer', { static: true, read: ViewContainerRef })
   hbarEntry: ViewContainerRef;
@@ -51,36 +53,168 @@ export class GraphicsScreenComponent implements OnInit {
   @ViewChild('mixedcontainer', { static: true, read: ViewContainerRef })
   mixedEntry: ViewContainerRef;
 
+  menus = menus;
+  faculty;
+  tab;
+  query;
+  showHBar = true;
+  showStacked = true;
+  showTable = true;
+  showPie = true;
+  showLine = true;
+  showMixed = true;
+
+
+
   constructor(
     private route: ActivatedRoute,
     private resolver: ComponentFactoryResolver,
-    private http: HttpClient
+    private apollo: Apollo
   ) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      console.log(this.menus);
-      this.faculty = faculties[+params.get('menuId')];
-      this.menu = menus[+params.get('tabId')];
-      this.cancelRequest();
+      this.faculty = params.get('faculty_id');
+      this.tab = params.get('tabId');
       this.sendPostRequest();
     });
   }
 
-  cancelRequest() {
-    if (this.request != null) {
-      this.request.unsubscribe();
+  sendPostRequest() {
+    for (let index = 0; index < querys.length; index++) {
+      const element = querys[index];
+      if (element.id === this.tab) {
+        this.query = querys[index].query;
+      }
     }
+
+    let variables;
+
+    switch (this.tab) {
+      case 'I01':
+        variables = {
+          faculty: this.faculty,
+          table: this.tab
+        };
+
+        this.sendGraphQlRequest(this.query, variables);
+        break;
+      case 'I02':
+        variables = {
+          faculty: this.faculty,
+          table: this.tab
+        };
+
+        this.sendGraphQlRequest(this.query, variables);
+        break;
+      case 'I03':
+        variables = {
+          faculty: this.faculty,
+          table: this.tab
+        };
+
+        this.sendGraphQlRequest(this.query, variables);
+        break;
+      case 'I04':
+        variables = {
+          faculty: this.faculty,
+        };
+
+        this.sendGraphQlRequest(this.query, variables);
+        break;
+      case 'I05':
+        variables = {
+          faculty: this.faculty,
+        };
+
+        this.sendGraphQlRequest(this.query, variables);
+        break;
+      case 'I06':
+        variables = {
+          faculty: this.faculty,
+        };
+
+        this.sendGraphQlRequest(this.query, variables);
+        break;
+      case 'F01':
+        variables = {
+          faculty: this.faculty,
+        };
+
+        this.sendGraphQlRequest(this.query, variables);
+        break;
+      case 'F02':
+        variables = {
+          faculty: this.faculty,
+        };
+
+        this.sendGraphQlRequest(this.query, variables);
+        break;
+      case 'F03':
+        variables = {
+          faculty: this.faculty,
+        };
+
+        this.sendGraphQlRequest(this.query, variables);
+        break;
+      case 'C01':
+        variables = {
+          faculty: this.faculty,
+        };
+
+        this.sendGraphQlRequest(this.query, variables);
+        break;
+      case 'C02':
+        variables = {
+          faculty: this.faculty,
+        };
+
+        this.sendGraphQlRequest(this.query, variables);
+        break;
+      case 'C02_1':
+        variables = {
+          faculty: this.faculty,
+        };
+
+        this.sendGraphQlRequest(this.query, variables);
+        break;
+      case 'BP3':
+        variables = {
+          faculty: this.faculty,
+        };
+
+        this.sendGraphQlRequest(this.query, variables);
+        break;
+    }
+
+    /*
+    const constHbar = this.hbarEntry.createComponent(hbarFactory);
+    const lineConst = this.lineEntry.createComponent(lineFactory);
+    const pieConst = this.pieEntry.createComponent(pieFactory);
+    const stackedConst = this.stackedEntry.createComponent(stackedFactory);
+    const tableConst = this.tableEntry.createComponent(tableFactory);
+    const mixedConst = this.mixedEntry.createComponent(mixedFactory);
+    */
   }
 
-  sendPostRequest() {
-    const json = {
-      facultyId: this.faculty.id + "",
-      menuId: this.menu
-    };
+  sendGraphQlRequest(facQuery, variables) {
+    let data;
+    this.apollo
+        .watchQuery({
+          query: facQuery
+          ,
+          variables
+        })
+        .valueChanges.subscribe((result: any) => {
+          let iterableData;
+          for (const value of Object.keys(result.data)) {
+            iterableData = result.data[value];
+          }
+          this.showGraphics(iterableData);
+        });
+  }
 
-    console.log(json);
-
+  showGraphics(data) {
     this.hbarEntry.clear();
     this.stackedEntry.clear();
     this.tableEntry.clear();
@@ -88,20 +222,53 @@ export class GraphicsScreenComponent implements OnInit {
     this.lineEntry.clear();
     this.mixedEntry.clear();
 
-    const hbarFactory = this.resolver.resolveComponentFactory(HbarComponent);
-    const stackedFactory = this.resolver.resolveComponentFactory(
-      StackedComponent
-    );
-    const tableFactory = this.resolver.resolveComponentFactory(TableComponent);
-    const pieFactory = this.resolver.resolveComponentFactory(PieComponent);
-    const lineFactory = this.resolver.resolveComponentFactory(LineComponent);
-    const mixedFactory = this.resolver.resolveComponentFactory(MixedComponent);
+    const tableConst = this.tableEntry.createComponent(this.tableFactory);
+    const constHbar = this.hbarEntry.createComponent(this.hbarFactory);
+    const lineConst = this.lineEntry.createComponent(this.lineFactory);
 
-    const constHbar = this.hbarEntry.createComponent(hbarFactory);
-    const lineConst = this.lineEntry.createComponent(lineFactory);
-    const pieConst = this.pieEntry.createComponent(pieFactory);
-    const stackedConst = this.stackedEntry.createComponent(stackedFactory);
-    const tableConst = this.tableEntry.createComponent(tableFactory);
-    const mixedConst = this.mixedEntry.createComponent(mixedFactory);
+    console.log(data);
+
+    switch (this.tab) {
+      case 'I01':
+        tableConst.instance.data = data;
+        tableConst.instance.type = 1;
+
+        constHbar.instance.data = data;
+        break;
+      case 'I02':
+        tableConst.instance.data = data;
+        tableConst.instance.type = 2;
+
+        lineConst.instance.data = data;
+        lineConst.instance.type = 1;
+        break;
+      case 'I03':
+        tableConst.instance.data = data;
+        tableConst.instance.type = 3;
+
+        lineConst.instance.data = data;
+        lineConst.instance.type = 2;
+        break;
+      case 'I04':
+        break;
+      case 'I05':
+        break;
+      case 'I06':
+        break;
+      case 'F01':
+        break;
+      case 'F02':
+        break;
+      case 'F03':
+        break;
+      case 'C01':
+        break;
+      case 'C02':
+        break;
+      case 'C02_1':
+        break;
+      case 'BP3':
+        break;
+    }
   }
 }

@@ -4,8 +4,10 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home.component';
 import { ChartsModule } from 'ng2-charts';
+import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
+import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
 
 /**
  * Material Modules
@@ -19,6 +21,8 @@ import {MatListModule} from '@angular/material/list';
 import {MatCardModule} from '@angular/material';
 import {MatToolbarModule} from '@angular/material';
 import {MatMenuModule} from '@angular/material';
+import {MatFormFieldModule} from '@angular/material';
+import {MatInputModule} from '@angular/material';
 import { HbarComponent } from './components/graphics/hbar/hbar.component';
 import { StackedComponent } from './components/graphics/stacked/stacked.component';
 import { TableComponent } from './components/graphics/table/table.component';
@@ -30,12 +34,14 @@ import { CardMenuComponent } from './components/card-menu/card-menu.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { InformationComponent } from './components/information/information.component';
 import { GraphicsScreenComponent } from './components/graphics-screen/graphics-screen.component';
+import { FilterPipe } from './filter.pipe';
+import { GraphQLModule } from './graphql/graphql.module';
+import { ApolloTestComponent } from './components/apollo-test/apollo-test.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     HbarComponent,
     StackedComponent,
     TableComponent,
@@ -46,6 +52,8 @@ import { GraphicsScreenComponent } from './components/graphics-screen/graphics-s
     WelcomeComponent,
     InformationComponent,
     GraphicsScreenComponent,
+    FilterPipe,
+    ApolloTestComponent
   ],
   imports: [
     BrowserModule,
@@ -62,11 +70,26 @@ import { GraphicsScreenComponent } from './components/graphics-screen/graphics-s
     TableModule,
     AppRoutingModule,
     MatMenuModule,
-    HttpClientModule
+    HttpClientModule,
+    MatFormFieldModule,
+    MatInputModule,
+    GraphQLModule,
+    HttpClientModule,
+    ApolloModule,
+    HttpLinkModule
   ],
-  providers: [
-    OcitebService,
-  ],
+  providers: [{
+    provide: APOLLO_OPTIONS,
+    useFactory: (httpLink: HttpLink) => {
+      return {
+        cache: new InMemoryCache(),
+        link: httpLink.create({
+          uri: 'https://backociteb.herokuapp.com/graphql' //our test Graphql Server which returns rates
+        })
+      };
+    },
+    deps: [HttpLink]
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

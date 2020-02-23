@@ -1,4 +1,3 @@
-import { menus } from './topbarMenus';
 import { Component } from '@angular/core';
 
 import { menu } from 'src/app/menu';
