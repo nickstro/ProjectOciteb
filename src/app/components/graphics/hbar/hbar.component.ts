@@ -48,7 +48,7 @@ export class HbarComponent {
     }
   ];
     public barChartData:any[] = [
-      {data: []}
+      {data: [], label: ''}
     ];
 
   ngOnInit(): void {
@@ -105,6 +105,48 @@ export class HbarComponent {
           }
         };
 
+        break;
+      case 5:
+        this.barChartType = 'horizontalBar';
+        let leyends5 = [];
+        for (const element of this.data) {
+          leyends5.push(element.Anio);
+          this.barChartData[0].data.push(element.total);
+        }
+        this.mbarChartLabels = leyends5;
+        break;
+      case 6:
+        let years6 = [];
+        for (const element of this.data) {
+
+        }
+
+        this.barChartType = 'horizontalBar';
+
+        this.barChartOptions = {
+          scaleShowVerticalLines: false,
+          responsive: true,
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              },
+              scaleLabel: {
+                display: true,
+                labelString: 'Año'
+              }
+            }],
+            xAxes: [{
+              ticks: {
+                beginAtZero: true
+              },
+              scaleLabel: {
+                display: true,
+                labelString: 'Cantidad de Jovenes investigadores'
+              }
+            }]
+          }
+        };
         break;
     }
   }

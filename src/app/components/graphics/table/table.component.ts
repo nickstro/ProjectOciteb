@@ -50,38 +50,28 @@ export class TableComponent {
         }
         break;
       case 3:
-        this.headL.push('Año', 'Centro de investigación y desarrollo tecnológico', 'Colciencias',
-                        'Empresas', 'Entidades del gobierno central', 'Entidades del gobierno regional',
-                        'Instituciones de educacion superior', 'Total');
-
-        let year2014 = [{id: 2014}];
-        let year2015 = [{id: 2015}];
-        let year2016 = [{id: 2016}];
-        let year2017 = [{id: 2017}];
-        let year2018 = [{id: 2018}];
-
-        for (let index = 0; index < this.data.length; index++) {
-          const element = this.data[index];
-          switch (element.anio) {
-            case 2014:
-              year2014.push(element.totalEntidadExterna);
-              break;
-            case 2015:
-              year2015.push(element.totalEntidadExterna);
-              break;
-            case 2016:
-              year2016.push(element.totalEntidadExterna);
-              break;
-            case 2017:
-              year2017.push(element.totalEntidadExterna);
-              break;
-            case 2018:
-              year2018.push(element.totalEntidadExterna);
-              break;
-          }
-        }
-
-        this.datos.push(year2014, year2015, year2016, year2017, year2018);
+        const headers = ['CENTRO DE INVESTIGACIÓN Y DESARROLLO TECNOLÓGICO', 'COLCIENCIAS',
+        'EMPRESAS', 'ENTIDADES DEL GOBIERNO CENTRAL', 'ENTIDADES DEL GOBIERNO REGIONAL',
+        'INSTITUCIONES DE EDUCACIÓN SUPERIOR'];
+        this.headL.push('Año');
+        this.headL.push(...headers);
+        this.headL.push('Total');
+        const yearsI03 = this.groupBy(this.data, 'anio');
+        Object.keys(yearsI03).forEach((year) => {
+          const line = [];
+          headers.forEach((type, index) => {
+            const result = yearsI03[year].find(({tipoEntidad}) => tipoEntidad === type);
+            if (result) {
+              line[index] = result.totalEntidadExterna;
+            } else {
+              line[index] = 0;
+            }
+          });
+          this.datos.push({id: year, first: line[0],
+          second: line[1], third: line[2],
+          fourth: line[3], five: line[4], six: line[5],
+          seven: line.map((data) => +data).reduce((total: number, actual) => (total + actual), 0)});
+        });
         break;
       case 4:
         this.headL.push('Grupo', 'Aporte', 'Numero de protocolos');
@@ -90,6 +80,29 @@ export class TableComponent {
           first: element.productos,
           second: element.total});
         }
+        break;
+      case 5:
+        this.headL.push('Año', 'Aporte');
+        let total = 0;
+        for (const element of this.data) {
+          this.datos.push({id: element.Anio,
+          first: element.total});
+          total += element.total;
+        }
+        this.datos.push({id: 'Total',
+          first: total});
+        break;
+      case 6:
+        this.headL.push('Año', 'Carrera', 'N° de Jovenes investigadores');
+        let total6 = 0;
+        for (const element of this.data) {
+          this.datos.push({id: element.Anio,
+          first: element.Programa,
+          second: element.total});
+          total6 += element.total;
+        }
+        this.datos.push({id: 'Total',
+          second: total6});
         break;
     }
   }

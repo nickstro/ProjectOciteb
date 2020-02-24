@@ -255,11 +255,11 @@ export class GraphicsScreenComponent implements OnInit {
         tableConst = this.tableEntry.createComponent(tableFactory);
         lineConst = this.lineEntry.createComponent(lineFactory);
 
-        tableConst.instance.data = data;
-        tableConst.instance.type = 3;
-
         lineConst.instance.data = data;
         lineConst.instance.type = 2;
+
+        tableConst.instance.data = data;
+        tableConst.instance.type = 3;
         break;
       case 'I04':
         constHbar = this.hbarEntry.createComponent(hbarFactory);
@@ -272,10 +272,34 @@ export class GraphicsScreenComponent implements OnInit {
         constHbar.instance.type = 4;
         break;
       case 'I05':
+        constHbar = this.hbarEntry.createComponent(hbarFactory);
+        tableConst = this.tableEntry.createComponent(tableFactory);
+
+        tableConst.instance.data = data;
+        tableConst.instance.type = 5;
+
+        constHbar.instance.data = data;
+        constHbar.instance.type = 5;
         break;
       case 'I06':
+        tableConst = this.tableEntry.createComponent(tableFactory);
+        lineConst = this.lineEntry.createComponent(lineFactory);
+
+        lineConst.instance.data = data;
+        lineConst.instance.type = 6;
+
+        tableConst.instance.data = data;
+        tableConst.instance.type = 5;
         break;
       case 'F01':
+        tableConst = this.tableEntry.createComponent(tableFactory);
+        constHbar = this.hbarEntry.createComponent(hbarFactory);
+
+        tableConst.instance.data = data;
+        tableConst.instance.type = 6;
+
+        constHbar.instance.data = data;
+        constHbar.instance.type = 6;
         break;
       case 'F02':
         break;

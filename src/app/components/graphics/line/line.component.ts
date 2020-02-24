@@ -118,6 +118,15 @@ export class LineComponent implements OnInit {
         this.lineChartData.push(aporteCentro, aporteColciencias, aporteEmpresas, aporteGobC, aporteGobR, aporteInst);
         this.lineChartLabels = ['2014', '2015', '2016', '2017', '2018'];
         break;
+      case 6:
+        const aporte6 = {data: [],
+          label: 'Aporte Especie'};
+        for (const element of this.data) {
+          this.lineChartLabels.push(element.Anio);
+          aporte6.data.push(element.total);
+        }
+        this.lineChartData.push(aporte6);
+        break;
     }
   }
 }
