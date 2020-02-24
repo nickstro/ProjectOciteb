@@ -1,14 +1,14 @@
-<mat-toolbar id="mainToolbar">
-  <mat-icon
+<mat-toolbar id="mainToolbar" style="background-color: #e8c13d; color: #312e2a;">
+  <mat-icon style="color: #312e2a; margin-left: 5px;"
     (click)="onToolbarMenuToggle()"
     id="toolbarMenu">subject</mat-icon>
-    <h1>Observatorio de Ciencia, Innovación y Tecnologia de Boyacá</h1>
+    <h1 style="color: #312e2a;">Observatorio de Ciencia, Innovación y Tecnologia de Boyacá</h1>
 </mat-toolbar>
 
-<mat-sidenav-container
+<mat-sidenav-container style="background-color: #e8c13d;"
   id="sidenavContainer"
  fullscreen>
-  <mat-sidenav
+  <mat-sidenav style="background-color: #e8c13d;"
     mode="side"
     #sidenav
     id="sidenav"
@@ -16,47 +16,47 @@
     [class.menu-close]="!isMenuOpen"
     opened>
 
-    <mat-list id="menus">
+    <mat-list id="menus" style="background-color: #e8c13d;">
 
-      <mat-list-item>
-        <button
+      <mat-list-item style="background-color: #e8c13d;">
+        <button style="background-color: #e8c13d;"
         class="menu-item"
           mat-flat-button
           (click)="onToolbarMenuToggle()"
           [routerLink]="['/']">
-          <mat-icon>home</mat-icon>
-          <a *ngIf="isMenuOpen">Inicio</a>
+          <mat-icon style="color: #312e2a;">home</mat-icon>
+          <a *ngIf="isMenuOpen" style="color: #312e2a;">Inicio</a>
 
         </button>
       </mat-list-item>
 
-      <mat-list-item>
-        <button
+      <mat-list-item style="background-color: #e8c13d;">
+        <button style="background-color: #e8c13d;"
         class="menu-item"
           mat-flat-button
           (click)="onToolbarMenuClose()"
           [routerLink]="['/cardMenu', 1]">
-          <mat-icon>business</mat-icon>
-          <a *ngIf="isMenuOpen">Facultades</a>
+          <mat-icon style="color: #312e2a;">business</mat-icon>
+          <a style="color: #312e2a;" *ngIf="isMenuOpen">Facultades</a>
 
         </button>
       </mat-list-item>
 
-      <mat-list-item>
-        <button
+      <mat-list-item style="background-color: #e8c13d;">
+        <button style="background-color: #e8c13d;"
         class="menu-item"
           mat-flat-button
           (click)="onToolbarMenuClose()"
           [routerLink]="['/information']">
-          <mat-icon>info</mat-icon>
-          <a *ngIf="isMenuOpen">Informacion</a>
+          <mat-icon style="color: #312e2a;">info</mat-icon>
+          <a style="color: #312e2a;" *ngIf="isMenuOpen">Informacion</a>
       </button>
       </mat-list-item>
 
     </mat-list>
   </mat-sidenav>
 
-  <mat-sidenav-content [ngStyle]="{ 'margin-left.px': contentMargin }">
+  <mat-sidenav-content [ngStyle]="{ 'margin-left.px': contentMargin }" style="background-color: #f6f6e9;">
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

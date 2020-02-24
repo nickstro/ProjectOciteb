@@ -1,3 +1,71 @@
+<div #mainmenu style="background-color: #312e2a;">
+  <mat-toolbar
+    class="example-toolbar" style="position: fixed; z-index: 2;">
+    <mat-toolbar-row>
+      <button mat-button [matMenuTriggerFor]="inversionMenu">
+        Inversión
+      </button>
+      <mat-menu #inversionMenu="matMenu">
+        <div *ngFor="let formationMenu of menus">
+          <button
+            mat-menu-item
+            *ngIf="formationMenu.type === 1"
+            [routerLink]="['/faculty_card_one', facultyOneId, 'faculty_card_two', facultyTwoId, 'faculty_tab', formationMenu.id]"
+            >
+            {{formationMenu.name}}
+          </button>
+        </div>
+      </mat-menu>
+
+      <button mat-button [matMenuTriggerFor]="formationMenu">Formación</button>
+      <mat-menu #formationMenu="matMenu" yPosition="above">
+        <div *ngFor="let formationMenu of menus">
+          <button style="background-color: #312e2a;"
+            mat-menu-item
+            *ngIf="formationMenu.type === 2"
+            [routerLink]="['/faculty_card_one', facultyOneId, 'faculty_card_two', facultyTwoId, 'faculty_tab', formationMenu.id]"
+          >
+            {{ formationMenu.name }}
+          </button>
+        </div>
+      </mat-menu>
+
+      <button mat-button [matMenuTriggerFor]="capacityMenu">Capacidades</button>
+      <mat-menu #capacityMenu="matMenu" yPosition="above">
+        <div *ngFor="let capacityMenu of menus">
+          <button style="background-color: #312e2a;"
+            mat-menu-item
+            *ngIf="capacityMenu.type === 3"
+            [routerLink]="['/faculty_card_one', facultyOneId, 'faculty_card_two', facultyTwoId, 'faculty_tab', capacityMenu.id]"
+          >
+            {{ capacityMenu.name }}
+          </button>
+        </div>
+      </mat-menu>
+
+      <button mat-button [matMenuTriggerFor]="productionMenu">
+        Producción Bibliográfica
+      </button>
+      <mat-menu #productionMenu="matMenu" yPosition="above">
+        <div *ngFor="let productionMenu of menus">
+          <button style="background-color: #312e2a;"
+            mat-menu-item
+            *ngIf="productionMenu.type === 4"
+            [routerLink]="['/faculty_card_one', facultyOneId, 'faculty_card_two', facultyTwoId, 'faculty_tab', productionMenu.id]"
+          >
+            {{ productionMenu.name }}
+          </button>
+        </div>
+      </mat-menu>
+
+      <button mat-button >
+        <a style="color: white;" [routerLink]="['/faculty_card', facultyOneId, 'faculty_tab', tabId]">Volver</a>
+      </button>
+
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>
+
 <div style="width: 95%; margin-left: 10px;">
   <div class="card-deck">
 

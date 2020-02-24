@@ -53,7 +53,6 @@ export class GraphicsScreenComponent implements OnInit {
   tabName;
   query;
   loadComplete = true;
-  loadSplit = false;
   showNoData = false;
   showLoading = true;
   showHBar = false;
@@ -73,7 +72,6 @@ export class GraphicsScreenComponent implements OnInit {
 
   ngOnInit() {
     if (this.loadComplete) {
-      this.loadSplit = false;
       this.route.paramMap.subscribe(params => {
           this.faculty = params.get('faculty_id');
           for (const iterator of faculties) {
@@ -89,8 +87,7 @@ export class GraphicsScreenComponent implements OnInit {
           }
           this.sendPostRequest();
         });
-    } else if (this.loadSplit){
-      this.loadComplete = false;
+    } else{
       for (const iterator of faculties) {
           if (iterator.id == this.faculty) {
             this.facultyName = iterator.name;
@@ -102,7 +99,6 @@ export class GraphicsScreenComponent implements OnInit {
             this.tabName = iterator.name;
           }
         }
-      console.log('F')
       this.sendPostRequest();
       }
 
@@ -231,7 +227,6 @@ export class GraphicsScreenComponent implements OnInit {
           for (const value of Object.keys(result.data)) {
             iterableData = result.data[value];
           }
-          console.log(iterableData);
           if (iterableData.length > 0) {
             this.showNoData = false;
             this.showGraphics(iterableData);
@@ -261,10 +256,10 @@ export class GraphicsScreenComponent implements OnInit {
 
     let constHbar;
     let lineConst;
-    //let pieConst = this.pieEntry.createComponent(pieFactory);
+    // let pieConst = this.pieEntry.createComponent(pieFactory);
     let stackedConst = this.pieEntry.createComponent(stackedFactory);
     let tableConst;
-    //let mixedConst = this.mixedEntry.createComponent(mixedFactory);
+    // let mixedConst = this.mixedEntry.createComponent(mixedFactory);
 
     switch (this.tab) {
       case 'I01':

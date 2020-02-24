@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 export class HbarComponent {
   data;
   type;
+  datos;
 
   public barChartOptions:any = {
     scaleShowVerticalLines: false,
@@ -31,7 +32,7 @@ export class HbarComponent {
 
     public barChartColors:Array<any> = [
     {
-      backgroundColor: 'rgba(105,159,177,0.2)',
+      backgroundColor: '#39A2AE',
       borderColor: 'rgba(105,159,177,1)',
       pointBackgroundColor: 'rgba(105,159,177,1)',
       pointBorderColor: '#fafafa',
@@ -64,13 +65,14 @@ export class HbarComponent {
               value += element.total;
             } else {
         this.barChartData[0].data.push(value);
+        year = element.anio;
+        console.log(value);
         value = 0;
         index--;
-        year = element.anio;
           }
         }
-        this.barChartData[0].data.push(35);
         this.mbarChartLabels = [...new Set(years)];
+
         break;
       case 4:
         let leyends = [];
@@ -273,5 +275,15 @@ export class HbarComponent {
         this.barChartData.push(libros);
         break;
     }
+  }
+  groupBy = (originalData: any [], element: any) => {
+    return originalData.reduce((list: any [], actual: any) => {
+     const key = actual[element];
+     if (!list[key]) {
+         list[key] = [];
+     }
+     list[key].push(actual);
+     return list;
+   }, {});
   }
 }

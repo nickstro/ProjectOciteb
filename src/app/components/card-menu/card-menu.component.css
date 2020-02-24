@@ -5,6 +5,11 @@
   margin: auto;
 }
 
+.mat-card{
+  color: black;
+  background-color: #e8c13d;
+}
+
 .mat-card-title{
   font-size: medium;
 }

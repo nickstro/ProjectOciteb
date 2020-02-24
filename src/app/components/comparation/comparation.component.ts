@@ -28,6 +28,7 @@ export class ComparationComponent implements OnInit {
   facultyOneId;
   facultyTwoId;
   tabId;
+  menus = menus;
 
   constructor(
     private route: ActivatedRoute,
@@ -53,12 +54,10 @@ export class ComparationComponent implements OnInit {
     const factOneView = this.facultyOneEntry.createComponent(facOneFactory);
     const factTwoView = this.facultyTwoEntry.createComponent(facTwoFactory);
 
-    factOneView.instance.loadSplit = true;
     factOneView.instance.loadComplete = false;
     factOneView.instance.faculty = this.facultyOneId;
     factOneView.instance.tab = this.tabId;
 
-    factTwoView.instance.loadSplit = true;
     factTwoView.instance.loadComplete = false;
     factTwoView.instance.faculty = this.facultyTwoId;
     factTwoView.instance.tab = this.tabId;

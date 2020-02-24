@@ -1,8 +1,10 @@
-<div #mainmenu style="background-color: black;">
+<div #mainmenu style="background-color: #312e2a;">
   <mat-toolbar [hidden]="!loadComplete"
     class="example-toolbar" style="position: fixed; z-index: 2;">
     <mat-toolbar-row>
-      <button mat-button [matMenuTriggerFor]="inversionMenu">Inversión</button>
+      <button mat-button [matMenuTriggerFor]="inversionMenu">
+        Inversión
+      </button>
       <mat-menu #inversionMenu="matMenu">
         <div *ngFor="let formationMenu of menus">
           <button
@@ -17,7 +19,7 @@
       <button mat-button [matMenuTriggerFor]="formationMenu">Formación</button>
       <mat-menu #formationMenu="matMenu" yPosition="above">
         <div *ngFor="let formationMenu of menus">
-          <button
+          <button style="background-color: #312e2a;"
             mat-menu-item
             *ngIf="formationMenu.type === 2"
             [routerLink]="['/faculty_card', faculty, 'faculty_tab', formationMenu.id]"
@@ -30,7 +32,7 @@
       <button mat-button [matMenuTriggerFor]="capacityMenu">Capacidades</button>
       <mat-menu #capacityMenu="matMenu" yPosition="above">
         <div *ngFor="let capacityMenu of menus">
-          <button
+          <button style="background-color: #312e2a;"
             mat-menu-item
             *ngIf="capacityMenu.type === 3"
             [routerLink]="['/faculty_card', faculty, 'faculty_tab', capacityMenu.id]"
@@ -45,7 +47,7 @@
       </button>
       <mat-menu #productionMenu="matMenu" yPosition="above">
         <div *ngFor="let productionMenu of menus">
-          <button
+          <button style="background-color: #312e2a;"
             mat-menu-item
             *ngIf="productionMenu.type === 4"
             [routerLink]="['/faculty_card', faculty, 'faculty_tab', productionMenu.id
@@ -60,7 +62,7 @@
         Comparar
       </button>
       <mat-menu #comparacionMenu="matMenu" yPosition="above">
-        <div *ngFor="let facultyComparation of faculties">
+        <div *ngFor="let facultyComparation of faculties" style="background-color: #312e2a;">
           <button mat-menu-item *ngIf="facultyComparation.id != faculty"
             [routerLink]="['/faculty_card_one', faculty, 'faculty_card_two', facultyComparation.id, 'faculty_tab', tab]"
             >
@@ -74,14 +76,14 @@
 </div>
 
 <div style="text-align: center; width: 100%; padding-top: 70px;">
-  <h3> {{facultyName}} </h3>
-  <h4>{{tabName}}</h4>
+  <h3 style="color: #312e2a;"> {{facultyName}} </h3>
+  <h4 style="color: #312e2a;">{{tabName}}</h4>
 </div>
 
 <div [hidden]="!showNoData" style="width: 100%; text-align: center;">
   <br>
   <img src="./assets/img/empty.svg" style="width: 100px; height: 100px; align-content: center;">
-  <h4>Lo sentimos, parece que no hay datos disponibles para lo que estas buscando
+  <h4 style="color: #312e2a;">Lo sentimos, parece que no hay datos disponibles para lo que estas buscando
     prueba con otra pestaña o busca en otra facultad.
   </h4>
   <br>
@@ -94,45 +96,45 @@
 <div class="loader" [hidden]="!showLoading">
 </div>
 
-<div style="width: 98%; margin-left: 10px;">
+<div #containerComplete style="width: 98%; margin-left: 10px;">
   <div class="card-deck">
 
-    <div class="card" [hidden]="!showHBar" style="min-width: 25%; max-height: 400px; overflow: scroll">
+    <div class="card" [hidden]="!showHBar" style="min-width: 25%; max-width: 45%; max-height: 400px; overflow: scroll">
         <div class="card-body">
           <h5 class="card-title">Grafico de barras</h5>
           <div #hbarcontainer></div>
         </div>
     </div>
 
-    <div class="card" [hidden]="!showStacked" style="min-width: 25%; max-height: 400px; overflow: scroll">
+    <div class="card" [hidden]="!showStacked" style="min-width: 25%; max-width: 45%; max-height: 400px; overflow: scroll">
         <div class="card-body">
           <h5 class="card-title">Grafico apilado</h5>
           <div #stackedcontainer></div>
         </div>
     </div>
 
-    <div class="card" [hidden]="!showTable" style="min-width: 25%; max-height: 400px; overflow: scroll">
+    <div class="card" [hidden]="!showTable" style="min-width: 25%; max-width: 45%; max-height: 400px; overflow: scroll">
       <div class="card-body">
         <h5 class="card-title">Tabla de datos</h5>
         <div #tablecontainer></div>
       </div>
     </div>
 
-  <div class="card" [hidden]="!showPie" style="min-width: 25%; max-height: 400px; overflow: scroll">
+  <div class="card" [hidden]="!showPie" style="min-width: 25%; max-width: 45%; max-height: 400px; overflow: scroll">
       <div class="card-body">
         <h5 class="card-title">Grafico de torta</h5>
         <div #piecontainer></div>
       </div>
   </div>
 
-  <div class="card" [hidden]="!showLine" style="min-width: 25%;  max-height: 400px; overflow: scroll">
+  <div class="card" [hidden]="!showLine" style="min-width: 25%; max-width: 45%; max-height: 400px; overflow: scroll">
       <div class="card-body">
         <h5 class="card-title">Grafico de lineas</h5>
         <div #linecontainer></div>
       </div>
   </div>
 
-  <div class="card" [hidden]="!showMixed" style="min-width: 25%; max-height: 400px; overflow: scroll">
+  <div class="card" [hidden]="!showMixed" style="min-width: 25%; max-width: 45%; max-height: 400px; overflow: scroll">
       <div class="card-body">
         <h5 class="card-title">Grafico mixto</h5>
         <div #mixedcontainer></div>

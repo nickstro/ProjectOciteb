@@ -28,10 +28,10 @@ export class LineComponent implements OnInit {
           id: 'y-axis-1',
           position: 'right',
           gridLines: {
-            color: 'rgba(255,0,0,0.3)',
+            color: '#FFFFFF',
           },
           ticks: {
-            fontColor: 'red',
+            display: false,
           }
         }
       ]

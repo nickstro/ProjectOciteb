@@ -1,9 +1,9 @@
 .image-container {
-  margin-top: 13%;
+
   display: flex;
   justify-content: center;
 }
 
 .image-container img {
-  width: 80%;
+  width: 45%;
 }
