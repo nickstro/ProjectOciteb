@@ -66,7 +66,6 @@ export class HbarComponent {
             } else {
         this.barChartData[0].data.push(value);
         year = element.anio;
-        console.log(value);
         value = 0;
         index--;
           }

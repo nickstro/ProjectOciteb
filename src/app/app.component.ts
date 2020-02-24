@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 
-import { menu } from 'src/app/menu';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,7 +9,6 @@ import { menu } from 'src/app/menu';
 export class AppComponent {
   title = 'OcitebProject';
   isMenuOpen = false;
-  menus = menu;
   contentMargin = 240;
 
   onFloatClick() {

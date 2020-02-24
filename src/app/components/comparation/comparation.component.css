@@ -4,9 +4,18 @@
   flex-flow: row wrap;
   align-items: stretch;
 }
+
 .card-deck .card {
-  background-color: grey;
+  margin: 10px;
+  width: 100% !important;
   display: flex;
-  margin: 30px;
-  flex-basis: 33.3%; /* change this value for each breakpoint*/
+  flex-basis: 50%; /* change this value for each breakpoint*/
+}
+
+.card-body {
+  background-color: white;
+}
+
+.test {
+  min-width: 100%;
 }

@@ -1,4 +1,3 @@
-import { OcitebService } from './ociteb.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -34,9 +33,7 @@ import { CardMenuComponent } from './components/card-menu/card-menu.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { InformationComponent } from './components/information/information.component';
 import { GraphicsScreenComponent } from './components/graphics-screen/graphics-screen.component';
-import { FilterPipe } from './filter.pipe';
 import { GraphQLModule } from './graphql/graphql.module';
-import { ApolloTestComponent } from './components/apollo-test/apollo-test.component';
 import { ComparationComponent } from './components/comparation/comparation.component';
 
 
@@ -53,8 +50,6 @@ import { ComparationComponent } from './components/comparation/comparation.compo
     WelcomeComponent,
     InformationComponent,
     GraphicsScreenComponent,
-    FilterPipe,
-    ApolloTestComponent,
     ComparationComponent
   ],
   imports: [

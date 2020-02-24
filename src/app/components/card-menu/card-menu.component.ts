@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { faculties } from 'src/app/faculties';
-import { schools } from 'src/app/schools';
-import { investigationGroups } from 'src/app/investigationGroups';
 import { MatTableDataSource } from '@angular/material';
 
 @Component({
@@ -40,16 +38,6 @@ export class CardMenuComponent implements OnInit {
         // Facultades
         this.menuTitle = 'Facultades';
         this.cardList = faculties;
-        break;
-      case 2:
-        // Grupos de investigacion
-        this.menuTitle = 'Grupos de investigacion';
-        this.cardList = investigationGroups;
-        break;
-      case 3:
-        // Escuelas
-        this.menuTitle = 'Escuelas';
-        this.cardList = schools;
         break;
     }
   }
