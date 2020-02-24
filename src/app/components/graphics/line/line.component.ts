@@ -65,11 +65,11 @@ export class LineComponent implements OnInit {
   ngOnInit() {
     switch (this.type) {
       case 1:
-        let aporteEspecie = {data: [],
+        const aporteEspecie = {data: [],
           label: 'Aporte Especie'};
-        let aporteEfectivo = {data: [],
+        const aporteEfectivo = {data: [],
           label: 'Aporte Efectivo'};
-        let aporteExterno = {data: [],
+        const aporteExterno = {data: [],
           label: 'Aporte Externo'};
         for (const element of this.data) {
           this.lineChartLabels.push(element.anio);
@@ -80,7 +80,43 @@ export class LineComponent implements OnInit {
         this.lineChartData.push(aporteEspecie, aporteEfectivo, aporteExterno);
         break;
       case 2:
+        const aporteCentro = {data: [],
+          label: 'Centro de investigación y desarrollo tecnológico'};
+        const aporteColciencias = {data: [],
+          label: 'Colciencias'};
+        const aporteEmpresas = {data: [],
+          label: 'Empresas'};
+        const aporteGobC = {data: [],
+          label: 'Entidades del gobierno central'};
+        const aporteGobR = {data: [],
+          label: 'Entidades del gobierno regional'};
+        const aporteInst = {data: [],
+          label: 'Instituciones de educacion superior'};
 
+        for (const element of this.data) {
+          switch (element.tipoEntidad) {
+            case 'CENTRO DE INVESTIGACIÓN Y DESARROLLO TECNOLÓGICO':
+              aporteCentro.data.push(element.totalEntidadExterna);
+              break;
+            case 'COLCIENCIAS':
+              aporteColciencias.data.push(element.totalEntidadExterna);
+              break;
+            case 'EMPRESAS':
+              aporteEmpresas.data.push(element.totalEntidadExterna);
+              break;
+            case 'ENTIDADES DEL GOBIERNO CENTRAL':
+              aporteGobC.data.push(element.totalEntidadExterna);
+              break;
+            case 'ENTIDADES DEL GOBIERNO REGIONAL':
+              aporteGobR.data.push(element.totalEntidadExterna);
+              break;
+            case 'INSTITUCIONES DE EDUCACIÓN SUPERIOR':
+              aporteInst.data.push(element.totalEntidadExterna);
+              break;
+          }
+        }
+        this.lineChartData.push(aporteCentro, aporteColciencias, aporteEmpresas, aporteGobC, aporteGobR, aporteInst);
+        this.lineChartLabels = ['2014', '2015', '2016', '2017', '2018'];
         break;
     }
   }

@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
 })
 export class HbarComponent {
   data;
+  type;
 
   public barChartOptions:any = {
     scaleShowVerticalLines: false,
@@ -51,23 +52,60 @@ export class HbarComponent {
     ];
 
   ngOnInit(): void {
-    console.log(this.data);
-    let years = [];
-    let year = 2014;
-    let value = 0;
-    for (let index = 0; index < this.data.length; index++) {
-      const element = this.data[index];
-      years.push(element.anio);
-      if (element.anio === year) {
-        value += element.total;
-      } else {
+    switch (this.type) {
+      case 1:
+        let years = [];
+        let year = 2014;
+        let value = 0;
+        for (let index = 0; index < this.data.length; index++) {
+            const element = this.data[index];
+            years.push(element.anio);
+            if (element.anio === year) {
+              value += element.total;
+            } else {
         this.barChartData[0].data.push(value);
         value = 0;
         index--;
         year = element.anio;
-      }
-    }
+          }
+        }
+        this.barChartData[0].data.push(35);
+        this.mbarChartLabels = [...new Set(years)];
+        break;
+      case 4:
+        let leyends = [];
+        for (const element of this.data) {
+          leyends.push(element.Grupo);
+          this.barChartData[0].data.push(element.total);
+        }
+        this.mbarChartLabels = leyends;
 
-    this.mbarChartLabels = [...new Set(years)];
+        this.barChartOptions = {
+          scaleShowVerticalLines: false,
+          responsive: true,
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              },
+              scaleLabel: {
+                display: true,
+                labelString: 'Aporte'
+              }
+            }],
+            xAxes: [{
+              ticks: {
+                beginAtZero: true
+              },
+              scaleLabel: {
+                display: true,
+                labelString: 'Grupos'
+              }
+            }]
+          }
+        };
+
+        break;
+    }
   }
 }

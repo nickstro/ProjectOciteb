@@ -196,11 +196,12 @@ export class GraphicsScreenComponent implements OnInit {
           ,
           variables
         })
-        .valueChanges.subscribe((result: any) => {
+        .valueChanges.subscribe((result) => {
           let iterableData;
           for (const value of Object.keys(result.data)) {
             iterableData = result.data[value];
           }
+          console.log(iterableData);
           this.showGraphics(iterableData);
         });
   }
@@ -229,8 +230,6 @@ export class GraphicsScreenComponent implements OnInit {
     let tableConst;
     //let mixedConst = this.mixedEntry.createComponent(mixedFactory);
 
-    console.log(data);
-
     switch (this.tab) {
       case 'I01':
         constHbar = this.hbarEntry.createComponent(hbarFactory);
@@ -240,6 +239,7 @@ export class GraphicsScreenComponent implements OnInit {
         tableConst.instance.type = 1;
 
         constHbar.instance.data = data;
+        constHbar.instance.type = 1;
         break;
       case 'I02':
         lineConst = this.lineEntry.createComponent(lineFactory);
@@ -253,11 +253,23 @@ export class GraphicsScreenComponent implements OnInit {
         break;
       case 'I03':
         tableConst = this.tableEntry.createComponent(tableFactory);
+        lineConst = this.lineEntry.createComponent(lineFactory);
 
         tableConst.instance.data = data;
         tableConst.instance.type = 3;
+
+        lineConst.instance.data = data;
+        lineConst.instance.type = 2;
         break;
       case 'I04':
+        constHbar = this.hbarEntry.createComponent(hbarFactory);
+        tableConst = this.tableEntry.createComponent(tableFactory);
+
+        tableConst.instance.data = data;
+        tableConst.instance.type = 4;
+
+        constHbar.instance.data = data;
+        constHbar.instance.type = 4;
         break;
       case 'I05':
         break;

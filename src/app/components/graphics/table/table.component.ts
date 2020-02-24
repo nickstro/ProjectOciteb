@@ -20,8 +20,24 @@ export class TableComponent {
     switch (this.type) {
       case 1:
         this.headL.push('Año', 'Capital Semilla', 'Contrapartida', 'Sin financiacion', 'Total Proyectos');
-        let years = this.groupBy(this.data, 'anio');
-        console.log(years);
+        const years = this.groupBy(this.data, 'anio');
+        Object.keys(years).forEach( (item) => {
+          years[item].sort((a: any, b: any) => a.tipo < b.tipo ? -1 : 1);
+        });
+        Object.keys(years).forEach((item) => {
+          this.datos.push({id: item, first: years[item][0].total,
+            second: years[item][1].total, third: years[item][2].total,
+            fourth: years[item][0].total + years[item][1].total + years[item][2].total});
+        });
+        const totals = [0, 0, 0];
+        Object.keys(years).forEach((actual) => {
+          totals.forEach((item, index) =>{
+            totals[index] += years[actual][index].total;
+          });
+        });
+        this.datos.push({id: 'Totales', first: totals[0],
+          second: totals[1], third: totals[2],
+          fourth: (totals[0] + totals[1] + totals[2])});
         break;
       case 2:
         this.headL.push('Año', 'Aporte Especie UPTC', 'Aporte Efectivo UPTC', 'Aporte Externo', 'Total Proyectos');
@@ -38,38 +54,53 @@ export class TableComponent {
                         'Empresas', 'Entidades del gobierno central', 'Entidades del gobierno regional',
                         'Instituciones de educacion superior', 'Total');
 
-        let year2014 = [{id: '2014'}];
-        let year2015 = [{id: '2015'}];
-        let year2016 = [{id: '2016'}];
-        let year2017 = [{id: '2017'}];
-        let year2018 = [{id: '2018'}];
+        let year2014 = [{id: 2014}];
+        let year2015 = [{id: 2015}];
+        let year2016 = [{id: 2016}];
+        let year2017 = [{id: 2017}];
+        let year2018 = [{id: 2018}];
 
-        for (let element of this.data) {
-          /*
-          this.datos.push({id: element.anio,
-          first: element.totalEntidadExterna,
-          second: element.totalEntidadExterna,
-          third: element.totalEntidadExterna,
-          fourth: element.totalEntidadExterna,
-          five: element.totalEntidadExterna,
-          six: element.totalEntidadExterna,
-          seven: element.totalEntidadExterna}
-          );
-          */
+        for (let index = 0; index < this.data.length; index++) {
+          const element = this.data[index];
+          switch (element.anio) {
+            case 2014:
+              year2014.push(element.totalEntidadExterna);
+              break;
+            case 2015:
+              year2015.push(element.totalEntidadExterna);
+              break;
+            case 2016:
+              year2016.push(element.totalEntidadExterna);
+              break;
+            case 2017:
+              year2017.push(element.totalEntidadExterna);
+              break;
+            case 2018:
+              year2018.push(element.totalEntidadExterna);
+              break;
+          }
         }
+
         this.datos.push(year2014, year2015, year2016, year2017, year2018);
-          break;
+        break;
+      case 4:
+        this.headL.push('Grupo', 'Aporte', 'Numero de protocolos');
+        for (let element of this.data) {
+          this.datos.push({id: element.Grupo,
+          first: element.productos,
+          second: element.total});
+        }
+        break;
     }
   }
-  groupBy = (list: any [], element: any) => {
-    let tempList = [];
-    return this.data.reduce((list: any[], actual: any) => {
+  groupBy = (originalData: any [], element: any) => {
+    return originalData.reduce((list: any [], actual: any) => {
      const key = actual[element];
      if (!list[key]) {
          list[key] = [];
      }
-     tempList.push(actual);
-     return tempList;
-   });
- }
+     list[key].push(actual);
+     return list;
+   }, {});
+  }
 }

@@ -82,24 +82,25 @@ export const querys = [
       }
       `,
     }, {
-      // TODO Falta
       id: 'F03',
       query:  gql `query test($faculty: String!){
-        Formation2List(faculty: $faculty){
-          Programa
-          Anio
-          total
+        Formation3List(faculty: $faculty){
+         Anio
+          NoEstSemilleros
         }
       }
       `,
     }, {
-      // TODO Falta
       id: 'C01',
       query:  gql `query test($faculty: String!){
-        Formation2List(faculty: $faculty){
-          Programa
-          Anio
-          total
+        Capacity1List(faculty: $faculty){
+         Anio
+          A1
+          A
+          B
+          C
+          D
+          R
         }
       }
       `,

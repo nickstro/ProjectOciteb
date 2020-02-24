@@ -26,4 +26,12 @@
         <td>{{el.seven}}</td>
       </tr>
     </tbody>
+
+    <tbody *ngIf="type === 4">
+      <tr mdbTableCol *ngFor="let el of datos" >
+        <th scope="row">{{el.id}}</th>
+        <td>{{el.first}}</td>
+        <td>{{el.second}}</td>
+      </tr>
+    </tbody>
   </table>
