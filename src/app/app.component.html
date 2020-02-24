@@ -47,28 +47,6 @@
         class="menu-item"
           mat-flat-button
           (click)="onToolbarMenuClose()"
-          [routerLink]="['/menus', 12, 'tabs', 1]">
-          <mat-icon>search</mat-icon>
-          <a *ngIf="isMenuOpen">Grupos de investigacion</a>
-        </button>
-      </mat-list-item>
-
-      <mat-list-item>
-        <button
-        class="menu-item"
-          mat-flat-button
-          (click)="onToolbarMenuClose()"
-          [routerLink]="['/menus', 13, 'tabs', 1]">
-          <mat-icon>school</mat-icon>
-          <a *ngIf="isMenuOpen">Escuelas</a>
-      </button>
-      </mat-list-item>
-
-      <mat-list-item>
-        <button
-        class="menu-item"
-          mat-flat-button
-          (click)="onToolbarMenuClose()"
           [routerLink]="['/information']">
           <mat-icon>info</mat-icon>
           <a *ngIf="isMenuOpen">Informacion</a>
@@ -76,10 +54,6 @@
       </mat-list-item>
 
     </mat-list>
-
-    <button mat-fab (click)="onFloatClick()">
-      <mat-icon>search</mat-icon>
-    </button>
   </mat-sidenav>
 
   <mat-sidenav-content [ngStyle]="{ 'margin-left.px': contentMargin }">

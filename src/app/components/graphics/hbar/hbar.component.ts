@@ -117,9 +117,22 @@ export class HbarComponent {
         break;
       case 6:
         let years6 = [];
-        for (const element of this.data) {
-
+        let year6 = 2016;
+        let value6 = 0;
+        for (let index = 0; index < this.data.length; index++) {
+          const element = this.data[index];
+          years6.push(element.Anio);
+          if (element.Anio === year6) {
+            value6 += element.total;
+          } else {
+            this.barChartData[0].data.push(value6);
+            value6 = 0;
+            year6 = element.Anio;
+            index--;
+          }
         }
+
+        this.mbarChartLabels = [...new Set(years6)];
 
         this.barChartType = 'horizontalBar';
 

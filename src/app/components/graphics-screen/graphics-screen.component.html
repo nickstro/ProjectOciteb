@@ -1,5 +1,5 @@
 <div #mainmenu style="background-color: black;">
-  <mat-toolbar class="example-toolbar">
+  <mat-toolbar class="example-toolbar" style="position: fixed; z-index: 2;">
     <mat-toolbar-row>
       <button mat-button [matMenuTriggerFor]="inversionMenu">Inversión</button>
       <mat-menu #inversionMenu="matMenu">
@@ -58,41 +58,47 @@
   </mat-toolbar>
 </div>
 
-<div style="width: 90%;">
-  <div class="container">
-    <div>
-        <div class="card card-body">
-          <div #hbarcontainer></div>
-        </div>
-    </div>
+<div style="text-align: center; width: 100%; padding-top: 70px;">
+  <h2> {{facultyName}} </h2>
+  <h3>{{tabName}}</h3>
+</div>
 
-    <div>
-        <div class="card card-body">
-          <div #stackedcontainer></div>
+<div style="width: 100%;">
+    <div class="row card-deck">
+      <div class="col" [hidden]="!showHBar" >
+          <div class="card card-body">
+            <div #hbarcontainer></div>
+          </div>
         </div>
-    </div>
 
-    <div>
+      <div class="col" [hidden]="!showStacked">
+          <div class="card card-body">
+            <div #stackedcontainer></div>
+          </div>
+      </div>
+
+    <div class="col" [hidden]="!showTable">
         <div class="card card-body">
           <div #tablecontainer></div>
         </div>
     </div>
-    <div>
+
+    <div class="col" [hidden]="!showPie">
         <div class="card card-body">
           <div #piecontainer></div>
         </div>
     </div>
-    <div>
+
+    <div class="col" [hidden]="!showLine">
         <div class="card card-body">
           <div #linecontainer></div>
         </div>
     </div>
 
-    <div>
+    <div class="col" [hidden]="!showMixed">
         <div class="card card-body">
           <div #mixedcontainer></div>
         </div>
     </div>
-
   </div>
 </div>
