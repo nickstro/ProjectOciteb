@@ -127,6 +127,15 @@ export class LineComponent implements OnInit {
         }
         this.lineChartData.push(aporte6);
         break;
+      case 7:
+        const aporte7 = {data: [],
+          label: 'N° Estimado de semilleros'};
+        for (const element of this.data) {
+          this.lineChartLabels.push(element.Anio);
+          aporte7.data.push(element.NoEstSemilleros);
+        }
+        this.lineChartData.push(aporte7);
+        break;
     }
   }
 }

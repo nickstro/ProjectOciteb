@@ -161,6 +161,117 @@ export class HbarComponent {
           }
         };
         break;
+      case 7:
+        for (const element of this.data) {
+          this.barChartData[0].data.push(element.NoEstSemilleros);
+          this.mbarChartLabels.push(element.Anio);
+        }
+
+        this.barChartOptions = {
+          scaleShowVerticalLines: false,
+          responsive: true,
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              },
+              scaleLabel: {
+                display: true,
+                labelString: 'N° Estimado de semilleros'
+              }
+            }],
+            xAxes: [{
+              ticks: {
+                beginAtZero: true
+              },
+              scaleLabel: {
+                display: true,
+                labelString: 'Año'
+              }
+            }]
+          }
+        };
+        break;
+      case 8:
+        let a1 =
+        {data: [], label: 'A1'};
+        let a =
+        {data: [], label: 'A'};
+        let b =
+        {data: [], label: 'B'};
+        let c =
+        {data: [], label: 'C'};
+
+        for (const element of this.data) {
+          this.mbarChartLabels.push(element.Anio);
+          a1.data.push(element.A1);
+          a.data.push(element.A);
+          b.data.push(element.B);
+          c.data.push(element.C);
+        }
+
+        this.barChartType = 'horizontalBar';
+
+        this.barChartData.push(a1, a, b, c);
+        this.barChartOptions = {
+          scaleShowVerticalLines: false,
+          responsive: true,
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              },
+              scaleLabel: {
+                display: true,
+                labelString: 'Cantidad de grupos de investigacion'
+              }
+            }],
+            xAxes: [{
+              ticks: {
+                beginAtZero: true
+              },
+              scaleLabel: {
+                display: true,
+                labelString: 'Año'
+              }
+            }]
+          }
+        };
+        break;
+      case 9:
+        let invYears = [];
+        let invSenior =
+        {data: [], label: 'Investigador Senior (IS)'};
+        let invJunior =
+        {data: [], label: 'Investigador Junior (IJ)'};
+        let invAsoc =
+        {data: [], label: 'Investigador Asociado (IA)'};
+        for (const element of this.data) {
+          invYears.push(element.Anio);
+          switch (element.Tipo) {
+            case 'Investigador S�nior (IS)':
+              invSenior.data.push(element.total);
+              break;
+            case 'Investigador Junior (IJ)':
+              invJunior.data.push(element.total);
+              break;
+            case 'Investigador Asociado (IA)':
+              invAsoc.data.push(element.total);
+              break;
+          }
+        }
+        this.barChartData.push(invSenior, invJunior, invAsoc);
+        this.mbarChartLabels = [...new Set(invYears)];
+        break;
+      case 10:
+        let libros =
+        {data: [], label: 'Libros'};
+        for (const element of this.data) {
+          this.mbarChartLabels.push(element.Anio);
+          libros.data.push(element.total);
+        }
+        this.barChartData.push(libros);
+        break;
     }
   }
 }

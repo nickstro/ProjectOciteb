@@ -10,16 +10,11 @@
   <div>
     <mat-card-content class="grid">
       <mat-card class="example-card-two" *ngFor="let card of this.dataSource.filteredData; index as i"
-        [routerLink]="['/faculty_card', card.id, 'faculty_tab', 'I01']">
-        <mat-card-header>
+        [routerLink]="['/faculty_card', card.id, 'faculty_tab', 'I01']" style="height: 100px !important;">
+        <mat-card-header style="margin-top: 15px;">
               <img mat-card-avatar src="http://placeimg.com/{{600 + i}}/480/tech" class="example-header-image">
-              <mat-card-title style="text-align: center; width: 100%;">{{card.name}}</mat-card-title>
+              <mat-card-title style="text-align: left !important">{{card.name}}</mat-card-title>
           </mat-card-header>
-          <!--
-          <mat-card-actions>
-              <button mat-raised-button [routerLink]="['/faculty_card', card.id, 'faculty_tab', 'I01']">Entrar</button>
-          </mat-card-actions>
-          -->
       </mat-card>
     </mat-card-content>
   </div>

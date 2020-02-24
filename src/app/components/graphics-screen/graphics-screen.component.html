@@ -1,5 +1,6 @@
 <div #mainmenu style="background-color: black;">
-  <mat-toolbar class="example-toolbar" style="position: fixed; z-index: 2;">
+  <mat-toolbar [hidden]="!loadComplete"
+    class="example-toolbar" style="position: fixed; z-index: 2;">
     <mat-toolbar-row>
       <button mat-button [matMenuTriggerFor]="inversionMenu">Inversión</button>
       <mat-menu #inversionMenu="matMenu">
@@ -54,51 +55,88 @@
           </button>
         </div>
       </mat-menu>
+
+      <button mat-button [matMenuTriggerFor]="comparacionMenu">
+        Comparar
+      </button>
+      <mat-menu #comparacionMenu="matMenu" yPosition="above">
+        <div *ngFor="let facultyComparation of faculties">
+          <button mat-menu-item *ngIf="facultyComparation.id != faculty"
+            [routerLink]="['/faculty_card_one', faculty, 'faculty_card_two', facultyComparation.id, 'faculty_tab', tab]"
+            >
+            {{ facultyComparation.name }}
+          </button>
+        </div>
+      </mat-menu>
+
     </mat-toolbar-row>
   </mat-toolbar>
 </div>
 
 <div style="text-align: center; width: 100%; padding-top: 70px;">
-  <h2> {{facultyName}} </h2>
-  <h3>{{tabName}}</h3>
+  <h3> {{facultyName}} </h3>
+  <h4>{{tabName}}</h4>
 </div>
 
-<div style="width: 100%;">
-    <div class="row card-deck">
-      <div class="col" [hidden]="!showHBar" >
-          <div class="card card-body">
-            <div #hbarcontainer></div>
-          </div>
-      </div>
+<div [hidden]="!showNoData" style="width: 100%; text-align: center;">
+  <br>
+  <img src="./assets/img/empty.svg" style="width: 100px; height: 100px; align-content: center;">
+  <h4>Lo sentimos, parece que no hay datos disponibles para lo que estas buscando
+    prueba con otra pestaña o busca en otra facultad.
+  </h4>
+  <br>
+  <button mat-button style="background-color: cornflowerblue; width: 60%;"
+  [routerLink]="['/cardMenu', 1]">
+    Volver a facultades
+  </button>
+</div>
 
-      <div class="col" [hidden]="!showStacked">
-          <div class="card card-body">
-            <div #stackedcontainer></div>
-          </div>
-      </div>
+<div class="loader" [hidden]="!showLoading">
+</div>
 
-      <div class="col" [hidden]="!showTable">
-        <div class="card card-body">
-          <div #tablecontainer></div>
-        </div>
-      </div>
+<div style="width: 98%; margin-left: 10px;">
+  <div class="card-deck">
 
-    <div class="col" [hidden]="!showPie">
-        <div class="card card-body">
-          <div #piecontainer></div>
-        </div>
-    </div>
-
-    <div class="col" [hidden]="!showLine">
-        <div class="card card-body">
-          <div #linecontainer></div>
+    <div class="card" [hidden]="!showHBar" style="min-width: 25%; max-height: 400px; overflow: scroll">
+        <div class="card-body">
+          <h5 class="card-title">Grafico de barras</h5>
+          <div #hbarcontainer></div>
         </div>
     </div>
 
-    <div class="col" [hidden]="!showMixed">
-        <div class="card card-body">
-          <div #mixedcontainer></div>
+    <div class="card" [hidden]="!showStacked" style="min-width: 25%; max-height: 400px; overflow: scroll">
+        <div class="card-body">
+          <h5 class="card-title">Grafico apilado</h5>
+          <div #stackedcontainer></div>
         </div>
     </div>
+
+    <div class="card" [hidden]="!showTable" style="min-width: 25%; max-height: 400px; overflow: scroll">
+      <div class="card-body">
+        <h5 class="card-title">Tabla de datos</h5>
+        <div #tablecontainer></div>
+      </div>
+    </div>
+
+  <div class="card" [hidden]="!showPie" style="min-width: 25%; max-height: 400px; overflow: scroll">
+      <div class="card-body">
+        <h5 class="card-title">Grafico de torta</h5>
+        <div #piecontainer></div>
+      </div>
   </div>
+
+  <div class="card" [hidden]="!showLine" style="min-width: 25%;  max-height: 400px; overflow: scroll">
+      <div class="card-body">
+        <h5 class="card-title">Grafico de lineas</h5>
+        <div #linecontainer></div>
+      </div>
+  </div>
+
+  <div class="card" [hidden]="!showMixed" style="min-width: 25%; max-height: 400px; overflow: scroll">
+      <div class="card-body">
+        <h5 class="card-title">Grafico mixto</h5>
+        <div #mixedcontainer></div>
+      </div>
+  </div>
+</div>
 </div>

@@ -37,6 +37,7 @@ import { GraphicsScreenComponent } from './components/graphics-screen/graphics-s
 import { FilterPipe } from './filter.pipe';
 import { GraphQLModule } from './graphql/graphql.module';
 import { ApolloTestComponent } from './components/apollo-test/apollo-test.component';
+import { ComparationComponent } from './components/comparation/comparation.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { ApolloTestComponent } from './components/apollo-test/apollo-test.compon
     InformationComponent,
     GraphicsScreenComponent,
     FilterPipe,
-    ApolloTestComponent
+    ApolloTestComponent,
+    ComparationComponent
   ],
   imports: [
     BrowserModule,
@@ -84,7 +86,7 @@ import { ApolloTestComponent } from './components/apollo-test/apollo-test.compon
       return {
         cache: new InMemoryCache(),
         link: httpLink.create({
-          uri: 'https://backociteb.herokuapp.com/graphql' //our test Graphql Server which returns rates
+          uri: 'https://backociteb.herokuapp.com/graphql'
         })
       };
     },

@@ -46,11 +46,16 @@ export class GraphicsScreenComponent implements OnInit {
   mixedEntry: ViewContainerRef;
 
   menus = menus;
+  faculties = faculties;
   faculty;
   facultyName;
   tab;
   tabName;
   query;
+  loadComplete = true;
+  loadSplit = false;
+  showNoData = false;
+  showLoading = true;
   showHBar = false;
   showStacked = false;
   showTable = false;
@@ -67,21 +72,40 @@ export class GraphicsScreenComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      this.faculty = params.get('faculty_id');
+    if (this.loadComplete) {
+      this.loadSplit = false;
+      this.route.paramMap.subscribe(params => {
+          this.faculty = params.get('faculty_id');
+          for (const iterator of faculties) {
+            if (iterator.id == this.faculty) {
+              this.facultyName = iterator.name;
+            }
+          }
+          this.tab = params.get('tabId');
+          for (const iterator of menus) {
+            if (iterator.id === this.tab) {
+              this.tabName = iterator.name;
+            }
+          }
+          this.sendPostRequest();
+        });
+    } else if (this.loadSplit){
+      this.loadComplete = false;
       for (const iterator of faculties) {
-        if (iterator.id == this.faculty) {
-          this.facultyName = iterator.name;
+          if (iterator.id == this.faculty) {
+            this.facultyName = iterator.name;
+          }
         }
-      }
-      this.tab = params.get('tabId');
+
       for (const iterator of menus) {
-        if (iterator.id === this.tab) {
-          this.tabName = iterator.name;
+          if (iterator.id === this.tab) {
+            this.tabName = iterator.name;
+          }
         }
-      }
+      console.log('F')
       this.sendPostRequest();
-    });
+      }
+
   }
 
   sendPostRequest() {
@@ -190,18 +214,11 @@ export class GraphicsScreenComponent implements OnInit {
         this.sendGraphQlRequest(this.query, variables);
         break;
     }
-
-    /*
-    const constHbar = this.hbarEntry.createComponent(hbarFactory);
-    const lineConst = this.lineEntry.createComponent(lineFactory);
-    const pieConst = this.pieEntry.createComponent(pieFactory);
-    const stackedConst = this.stackedEntry.createComponent(stackedFactory);
-    const tableConst = this.tableEntry.createComponent(tableFactory);
-    const mixedConst = this.mixedEntry.createComponent(mixedFactory);
-    */
   }
 
   sendGraphQlRequest(facQuery, variables) {
+    this.hideGraphics();
+    this.showLoading = true;
     let data;
     this.apollo
         .watchQuery({
@@ -215,7 +232,13 @@ export class GraphicsScreenComponent implements OnInit {
             iterableData = result.data[value];
           }
           console.log(iterableData);
-          this.showGraphics(iterableData);
+          if (iterableData.length > 0) {
+            this.showNoData = false;
+            this.showGraphics(iterableData);
+          } else {
+            this.showLoading = false;
+            this.showNoData = true;
+          }
         });
   }
 
@@ -239,7 +262,7 @@ export class GraphicsScreenComponent implements OnInit {
     let constHbar;
     let lineConst;
     //let pieConst = this.pieEntry.createComponent(pieFactory);
-    //let stackedConst = this.stackedEntry.createComponent(stackedFactory);
+    let stackedConst = this.pieEntry.createComponent(stackedFactory);
     let tableConst;
     //let mixedConst = this.mixedEntry.createComponent(mixedFactory);
 
@@ -326,8 +349,13 @@ export class GraphicsScreenComponent implements OnInit {
         this.hideGraphics();
         this.showTable = true;
         this.showHBar = true;
+        this.showLine = true;
         tableConst = this.tableEntry.createComponent(tableFactory);
         constHbar = this.hbarEntry.createComponent(hbarFactory);
+        lineConst = this.lineEntry.createComponent(lineFactory);
+
+        lineConst.instance.data = data;
+        lineConst.instance.type = 6;
 
         tableConst.instance.data = data;
         tableConst.instance.type = 6;
@@ -336,18 +364,85 @@ export class GraphicsScreenComponent implements OnInit {
         constHbar.instance.type = 6;
         break;
       case 'F02':
+        this.hideGraphics();
+        this.showTable = true;
+        this.showHBar = true;
+        this.showLine = true;
+        tableConst = this.tableEntry.createComponent(tableFactory);
+        constHbar = this.hbarEntry.createComponent(hbarFactory);
+        lineConst = this.lineEntry.createComponent(lineFactory);
+
+        lineConst.instance.data = data;
+        lineConst.instance.type = 6;
+
+        tableConst.instance.data = data;
+        tableConst.instance.type = 6;
+
+        constHbar.instance.data = data;
+        constHbar.instance.type = 6;
         break;
       case 'F03':
+        this.hideGraphics();
+        this.showTable = true;
+        this.showHBar = true;
+        this.showLine = true;
+        tableConst = this.tableEntry.createComponent(tableFactory);
+        constHbar = this.hbarEntry.createComponent(hbarFactory);
+        lineConst = this.lineEntry.createComponent(lineFactory);
+
+        lineConst.instance.data = data;
+        lineConst.instance.type = 7;
+
+        tableConst.instance.data = data;
+        tableConst.instance.type = 7;
+
+        constHbar.instance.data = data;
+        constHbar.instance.type = 7;
         break;
       case 'C01':
+        this.hideGraphics();
+        this.showTable = true;
+        this.showHBar = true;
+        tableConst = this.tableEntry.createComponent(tableFactory);
+        constHbar = this.hbarEntry.createComponent(hbarFactory);
+
+        tableConst.instance.data = data;
+        tableConst.instance.type = 8;
+
+        constHbar.instance.data = data;
+        constHbar.instance.type = 8;
         break;
       case 'C02':
+        this.hideGraphics();
+        this.showHBar = true;
+        constHbar = this.hbarEntry.createComponent(hbarFactory);
+
+        constHbar.instance.data = data;
+        constHbar.instance.type = 9;
         break;
       case 'C02_1':
+        this.hideGraphics();
+        this.showHBar = true;
+        constHbar = this.hbarEntry.createComponent(hbarFactory);
+
+        constHbar.instance.data = data;
+        constHbar.instance.type = 9;
         break;
       case 'BP3':
+        this.hideGraphics();
+        this.showTable = true;
+        this.showHBar = true;
+        tableConst = this.tableEntry.createComponent(tableFactory);
+        constHbar = this.hbarEntry.createComponent(hbarFactory);
+
+        constHbar.instance.data = data;
+        constHbar.instance.type = 10;
+
+        tableConst.instance.data = data;
+        tableConst.instance.type = 10;
         break;
     }
+    this.showLoading = false;
   }
 
   hideGraphics() {

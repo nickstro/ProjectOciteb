@@ -104,6 +104,38 @@ export class TableComponent {
         this.datos.push({id: 'Total',
           second: total6});
         break;
+      case 7:
+        this.headL.push('Año', 'N° Estimado de Semilleros');
+        let total7 = 0;
+        for (const element of this.data) {
+          this.datos.push({id: element.Anio,
+          first: element.NoEstSemilleros});
+          total7 += element.NoEstSemilleros;
+        }
+        this.datos.push({id: 'Total',
+        first: total7});
+        break;
+      case 8:
+        this.headL.push('Año', 'Clasificacion A1', 'Clasificacion A', 'Clasificacion B', 'Clasificacion C');
+        for (let element of this.data) {
+          this.datos.push({id: element.Anio,
+          first: element.A1,
+          second: element.A,
+          third: element.B,
+          fourth: element.C});
+        }
+        break;
+      case 10:
+        this.headL.push('Año', 'N° de libros');
+        let total10 = 0;
+        for (const element of this.data) {
+          this.datos.push({id: element.Anio,
+          first: element.total});
+          total10 += element.total;
+        }
+        this.datos.push({id: 'Total',
+        first: total10});
+        break;
     }
   }
   groupBy = (originalData: any [], element: any) => {
