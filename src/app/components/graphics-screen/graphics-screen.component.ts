@@ -31,15 +31,6 @@ import { MixedComponent } from 'src/app/components/graphics/mixed/mixed.componen
   ]
 })
 export class GraphicsScreenComponent implements OnInit {
-  hbarFactory = this.resolver.resolveComponentFactory(HbarComponent);
-  stackedFactory = this.resolver.resolveComponentFactory(
-      StackedComponent
-    );
-  tableFactory = this.resolver.resolveComponentFactory(TableComponent);
-  pieFactory = this.resolver.resolveComponentFactory(PieComponent);
-  lineFactory = this.resolver.resolveComponentFactory(LineComponent);
-  mixedFactory = this.resolver.resolveComponentFactory(MixedComponent);
-
   @ViewChild('hbarcontainer', { static: true, read: ViewContainerRef })
   hbarEntry: ViewContainerRef;
   @ViewChild('stackedcontainer', { static: true, read: ViewContainerRef })
@@ -215,27 +206,45 @@ export class GraphicsScreenComponent implements OnInit {
   }
 
   showGraphics(data) {
-    this.hbarEntry.clear();
     this.stackedEntry.clear();
+    this.hbarEntry.clear();
     this.tableEntry.clear();
     this.pieEntry.clear();
     this.lineEntry.clear();
     this.mixedEntry.clear();
 
-    const tableConst = this.tableEntry.createComponent(this.tableFactory);
-    const constHbar = this.hbarEntry.createComponent(this.hbarFactory);
-    const lineConst = this.lineEntry.createComponent(this.lineFactory);
+    const hbarFactory = this.resolver.resolveComponentFactory(HbarComponent);
+    const stackedFactory = this.resolver.resolveComponentFactory(
+      StackedComponent
+    );
+    const tableFactory = this.resolver.resolveComponentFactory(TableComponent);
+    const pieFactory = this.resolver.resolveComponentFactory(PieComponent);
+    const lineFactory = this.resolver.resolveComponentFactory(LineComponent);
+    const mixedFactory = this.resolver.resolveComponentFactory(MixedComponent);
+
+    let constHbar;
+    let lineConst;
+    //let pieConst = this.pieEntry.createComponent(pieFactory);
+    //let stackedConst = this.stackedEntry.createComponent(stackedFactory);
+    let tableConst;
+    //let mixedConst = this.mixedEntry.createComponent(mixedFactory);
 
     console.log(data);
 
     switch (this.tab) {
       case 'I01':
+        constHbar = this.hbarEntry.createComponent(hbarFactory);
+        tableConst = this.tableEntry.createComponent(tableFactory);
+
         tableConst.instance.data = data;
         tableConst.instance.type = 1;
 
         constHbar.instance.data = data;
         break;
       case 'I02':
+        lineConst = this.lineEntry.createComponent(lineFactory);
+        tableConst = this.tableEntry.createComponent(tableFactory);
+
         tableConst.instance.data = data;
         tableConst.instance.type = 2;
 
@@ -243,11 +252,10 @@ export class GraphicsScreenComponent implements OnInit {
         lineConst.instance.type = 1;
         break;
       case 'I03':
+        tableConst = this.tableEntry.createComponent(tableFactory);
+
         tableConst.instance.data = data;
         tableConst.instance.type = 3;
-
-        lineConst.instance.data = data;
-        lineConst.instance.type = 2;
         break;
       case 'I04':
         break;

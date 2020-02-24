@@ -17,11 +17,10 @@ export class TableComponent {
   headL = [];
 
   ngOnInit(): void {
-
     switch (this.type) {
       case 1:
         this.headL.push('Año', 'Capital Semilla', 'Contrapartida', 'Sin financiacion', 'Total Proyectos');
-        let years = groupBy(this.data, 'anio');
+        let years = this.groupBy(this.data, 'anio');
         console.log(years);
         break;
       case 2:
@@ -62,14 +61,15 @@ export class TableComponent {
           break;
     }
   }
-   groupBy = (list: any [], element: any) => {
+  groupBy = (list: any [], element: any) => {
+    let tempList = [];
     return this.data.reduce((list: any[], actual: any) => {
      const key = actual[element];
      if (!list[key]) {
          list[key] = [];
      }
-     list[key].push(actual);
-     return list;
+     tempList.push(actual);
+     return tempList;
    });
- };
+ }
 }

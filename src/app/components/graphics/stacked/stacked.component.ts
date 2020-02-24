@@ -6,7 +6,7 @@ import { Component,  } from '@angular/core';
   styleUrls: ['./stacked.component.css']
 })
 export class StackedComponent {
-  data;
+  // data;
   public barChartOptions: any = {
     scales: {
       xAxes: [{
